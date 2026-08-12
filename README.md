@@ -1,189 +1,503 @@
-# SafeCook Pro
+<div align="center">
 
-**SafeCook Pro** is an intelligent IoT LPG gas-safety and monitoring application powered by the **Smart-Valve Retrofit (SVR)** system. Designed with a high-contrast, elderly-friendly user interface and multi-language support, SafeCook Pro detects hazardous gas leaks, monitors stove vessel placement, and automatically shuts off the gas supply before accidents happen.
+# 🛡️ SafeCook Pro
 
----
+### Smart Gas Stove Safety & Emergency Monitoring System
 
-## Problem
+**An IoT-powered safety platform designed to detect gas leaks, monitor cooking conditions, and provide rapid emergency response — with accessibility at its core.**
 
-Domestic LPG gas leaks and un-attended cooking are leading causes of household fires, gas poisoning, and severe kitchen injuries across the globe—disproportionately affecting elderly individuals and busy families:
-* **Gas Leaks**: MQ-series sensors detect unburnt LPG gas before human olfactory awareness.
-* **Unattended Stove Risks**: Food left boiling over or vessels removed while flame stays active creates fire hazards.
-* **Accessibility Gaps**: Standard IoT apps often feature tiny fonts and complex navigation, making them unusable for senior citizens.
+<br>
 
----
+<img src="safecook_logo_1783953432939.png" alt="SafeCook Pro Logo" width="180"/>
 
-## Solution
+<br><br>
 
-The **Smart-Valve Retrofit (SVR)** system attaches to existing domestic LPG gas regulators without requiring full stove replacement. Combined with the SafeCook Pro application, it offers:
-* **Real-time LPG PPM Telemetry**: Continuous monitoring of ambient gas concentration and ambient temperature.
-* **Ultrasonic Vessel Detection**: Detects whether cookware is present on the burner.
-* **Motorized Solenoid Valve Control**: Automatic emergency shutdown within milliseconds of leak detection or when vessel is absent beyond 30 seconds.
-* **Multi-Channel Emergency Alerts**: Local high-decibel buzzer, push notifications, voice announcements, and direct emergency contact speed-dial.
+**🚨 Gas Safety · 🏠 Smart Home · 👵 Accessibility · 🌐 Multilingual · 📊 Monitoring**
+
+</div>
 
 ---
 
-## Key Features
+## 📖 Overview
 
-* 🛡️ **Gas Leak Detection**: Instant alert triggering when gas PPM exceeds safe thresholds (100 PPM Warning, 300 PPM Critical).
-* 🫕 **Vessel Detection & Safety Timer**: Auto-shutoff countdown if a vessel is removed while the valve remains open.
-* 🔒 **Automatic & Manual Valve Control**: 1-tap emergency shutoff with modal confirmation dialogs.
-* 🚨 **Emergency Mode**: Dedicated ultra-high contrast emergency screen with emergency contact calling and step-by-step safety guides.
-* 📊 **Live Telemetry & Analytics**: Real-time line charts, daily cooking time metrics, and monthly safety score reports.
-* 👵 **Elderly-Friendly Interface**: High contrast colors, font scaling (Normal / Large / Extra Large), large touch targets (≥48px), and text-to-speech voice announcements.
-* 🌐 **Multi-Language Architecture**: 6 supported languages (**English**, **Tamil**, **Hindi**, **Telugu**, **Kannada**, **Malayalam**) with dynamic string updates.
-* 👥 **Family Member Linkage**: Role-based access control (Owner, Family Member, Guest view-only).
+**SafeCook Pro** is a smart kitchen safety system built around the **Smart-Valve Retrofit (SVR)** concept.
+
+The system combines gas sensing, vessel detection, automated valve control, emergency alerts, and a user-friendly monitoring application to help reduce risks associated with gas leaks and unattended cooking.
+
+A major design goal is **accessibility**. The interface is designed for users who may have difficulty with small text, complex navigation, or low-contrast interfaces.
+
+### 🎯 Core Idea
+
+> **Detect → Decide → Alert → Act**
+
+SafeCook Pro continuously monitors the cooking environment and can trigger an emergency response when a dangerous condition is detected.
 
 ---
 
-## System Architecture
+## 🚨 The Problem
 
+Traditional gas stoves generally depend heavily on users noticing unsafe conditions themselves.
+
+Common risks include:
+
+* 🔥 Gas leaks
+* 🍳 Unattended cooking
+* 🫕 Cookware being removed while the burner remains active
+* 🚨 Delayed emergency response
+* 👵 Difficult-to-use interfaces for elderly users
+* 🌐 Limited accessibility and language options
+
+SafeCook Pro aims to provide an additional layer of monitoring and automated response.
+
+---
+
+## 💡 The Solution
+
+SafeCook Pro combines a retrofit hardware concept with a software monitoring platform.
+
+### Smart-Valve Retrofit
+
+The SVR concept is designed to work alongside an existing domestic gas stove rather than requiring complete stove replacement.
+
+The system can integrate:
+
+* Gas sensors
+* Ultrasonic vessel detection
+* Temperature/environment monitoring
+* ESP32-based processing
+* Motorized valve control
+* Local alarms
+* Mobile/web monitoring
+* Emergency notifications
+
+---
+
+# ✨ Key Features
+
+| Feature                     | Description                                                                        |
+| --------------------------- | ---------------------------------------------------------------------------------- |
+| 🛡️ **Gas Leak Monitoring** | Monitors gas sensor readings and raises safety alerts                              |
+| 🫕 **Vessel Detection**     | Detects whether cookware is present on the cooking area                            |
+| 🔒 **Valve Control**        | Supports automated and manual valve-control workflows                              |
+| 🚨 **Emergency Mode**       | Provides a dedicated emergency interface and safety guidance                       |
+| 📊 **Live Monitoring**      | Displays sensor telemetry and historical information                               |
+| 👵 **Elderly-Friendly UI**  | Large touch targets, readable typography, high contrast and accessibility controls |
+| 🌐 **Multilingual Support** | English, Tamil, Hindi, Telugu, Kannada and Malayalam                               |
+| 👥 **Family Access**        | Supports different family-member access roles                                      |
+| 📱 **PWA Support**          | Web application can be installed as a Progressive Web App                          |
+| 🤖 **Android Companion**    | Native Android application source is included in the project                       |
+| 🔔 **Emergency Alerts**     | Designed for rapid notification during critical conditions                         |
+| 📈 **Analytics**            | Safety metrics, cooking activity and historical monitoring                         |
+
+---
+
+# 📸 Screenshots
+
+> Screenshots can be added to `docs/screenshots/`.
+
+### 🏠 Dashboard
+
+![SafeCook Pro Dashboard](docs/screenshots/dashboard.png)
+
+### 📊 Live Monitoring
+
+![SafeCook Pro Monitoring](docs/screenshots/monitoring.png)
+
+### 🚨 Emergency Mode
+
+![SafeCook Pro Emergency Mode](docs/screenshots/emergency.png)
+
+### ⚙️ Accessibility & Settings
+
+![SafeCook Pro Settings](docs/screenshots/settings.png)
+
+### 🌐 Language Selection
+
+![SafeCook Pro Language Selection](docs/screenshots/language.png)
+
+> **Tip:** Replace the placeholder screenshots above with screenshots from your actual application.
+
+---
+
+# 🏗️ System Architecture
+
+```text
+                 ┌──────────────────────┐
+                 │    Gas Sensor        │
+                 │      MQ-6            │
+                 └──────────┬───────────┘
+                            │
+                 ┌──────────▼───────────┐
+                 │  Ultrasonic Sensor   │
+                 │  Vessel Detection    │
+                 └──────────┬───────────┘
+                            │
+                            ▼
+                 ┌──────────────────────┐
+                 │        ESP32         │
+                 │  Safety Controller   │
+                 └───────┬───────┬──────┘
+                         │       │
+                  Sensor Data   Relay
+                         │       │
+                         ▼       ▼
+              ┌──────────────┐  ┌─────────────────┐
+              │ MQTT / Cloud │  │ Motorized Valve │
+              │ Communication│  │   Controller    │
+              └───────┬──────┘  └─────────────────┘
+                      │
+                      ▼
+             ┌────────────────────┐
+             │  SafeCook Backend  │
+             │  Node.js + SQLite  │
+             └─────────┬──────────┘
+                       │
+                       ▼
+             ┌────────────────────┐
+             │   SafeCook Pro     │
+             │   Web / PWA App    │
+             └─────────┬──────────┘
+                       │
+                       ▼
+             ┌────────────────────┐
+             │  User / Family     │
+             │ Monitoring & Alerts│
+             └────────────────────┘
 ```
-[ MQ-6 Gas Sensor ] ──┐
-[ Ultrasonic Sensor] ──┼──> [ ESP32 Microcontroller ] ──(MQTT / Firebase)──> [ SafeCook Pro Backend ]
-[ Temp/Humidity   ] ──┘         │ (Local Relay Signal)                             │
-                                ▼                                                  ▼
-                        [ Solenoid Valve ]                              [ SafeCook Pro App ]
-                                                                      (Web PWA & Android App)
+
+---
+
+# 🧩 Technology Stack
+
+### Frontend
+
+* HTML5
+* CSS3
+* Vanilla JavaScript
+* Modular JavaScript architecture
+* Responsive UI
+* Progressive Web App support
+* Custom design system
+* Canvas-based telemetry charts
+
+### Backend
+
+* Node.js
+* HTTP server
+* SQLite
+* Environment-based configuration
+
+### IoT / Hardware
+
+* ESP32
+* MQ-series gas sensing
+* Ultrasonic vessel detection
+* Temperature/environment monitoring
+* Relay-controlled valve concept
+* MQTT communication
+
+### Mobile
+
+* Android
+* Kotlin
+* Jetpack Compose
+
+### Accessibility
+
+* High-contrast interface
+* Adjustable font sizes
+* Large touch targets
+* Voice announcements
+* Multilingual interface
+* Simplified navigation
+
+---
+
+# 🌐 Supported Languages
+
+SafeCook Pro currently includes a multilingual architecture supporting:
+
+🇬🇧 English
+🇮🇳 Tamil
+🇮🇳 Hindi
+🇮🇳 Telugu
+🇮🇳 Kannada
+🇮🇳 Malayalam
+
+The translation system is implemented through the project's internationalization module.
+
+---
+
+# 📁 Project Structure
+
+```text
+SafeCook-PRO/
+│
+├── android/                    # Android application
+│
+├── css/                        # Application styles
+│   ├── design-system.css
+│   ├── components.css
+│   ├── screens.css
+│   └── animations.css
+│
+├── js/                         # Application JavaScript
+│   ├── app.js
+│   ├── state.js
+│   ├── router.js
+│   ├── i18n.js
+│   ├── components.js
+│   ├── charts.js
+│   ├── mock-data.js
+│   └── screens/
+│
+├── docs/                       # Documentation and screenshots
+│   └── screenshots/
+│
+├── index.html                  # Main web application
+├── server.js                   # Node.js backend
+├── sw.js                       # PWA service worker
+├── manifest.json               # PWA manifest
+├── package.json                # Project configuration
+├── .env.example                # Environment template
+├── .gitignore                  # Git ignore rules
+├── LICENSE                     # MIT License
+└── README.md                   # Project documentation
 ```
 
-### Component Status Matrix
-| System Layer | Component | Status |
-| :--- | :--- | :--- |
-| **Sensors & Hardware** | MQ-6 LPG Gas Sensor, Ultrasonic Distance | Implemented (Simulated Telemetry in Preview) |
-| **Microcontroller** | ESP32-S3 SVR Core Firmware | Planned / In Progress |
-| **Actuator** | 12V Motorized Solenoid Valve Relay | Implemented (Software Trigger) |
-| **Backend API** | Node.js HTTP Server (`server.js`) + SQLite | Implemented |
-| **Cloud Sync** | Firebase Realtime Database & AWS IoT Broker | In Progress |
-| **Web Frontend** | Vanilla JS / CSS3 PWA (`index.html`, `js/`) | ~75% Complete (Audited & Refactored) |
-| **Android App** | Jetpack Compose Kotlin Native App (`android/`) | In Progress |
-
 ---
 
-## Technology Stack
+# 🚀 Installation
 
-* **Frontend**: HTML5, Vanilla CSS3 (Custom Design System, Glassmorphism, CSS Variables), ES6+ Modular JavaScript.
-* **PWA Support**: Service Worker (`sw.js`), Web App Manifest (`manifest.json`).
-* **Backend Preview Server**: Node.js (`server.js`) using built-in `node:sqlite` database engine.
-* **Database**: SQLite (`safecook.db`) storing sensor history, alerts, family profiles, emergency contacts, and recipes.
-* **Mobile companion**: Native Android Application (`android/`) written in Kotlin with Jetpack Compose UI.
-* **Internationalization**: Lightweight custom i18n engine (`js/i18n.js`) with 6 regional language dictionaries.
+## Prerequisites
 
----
+Make sure you have:
 
-## Project Structure
+* **Node.js 18+**
+* **npm 9+**
+* Git
 
-```
-safecook-pro/
-├── index.html              # Main Web App entry point & bottom navigation layout
-├── server.js                # Node.js backend preview server with SQLite database
-├── tunnel.js                # Local tunnel utility for mobile preview testing
-├── package.json             # Node dependencies and npm scripts
-├── manifest.json            # Web App Manifest for PWA installation
-├── sw.js                    # Service Worker for offline PWA caching
-├── safecook.db              # Local SQLite database file (git-ignored)
-├── .env.example             # Template for required environment variables
-├── .gitignore               # Git ignore rules for node_modules, build artifacts, secrets
-├── LICENSE                  # MIT Open Source License
-├── css/
-│   ├── design-system.css    # Core design tokens, color palettes, typography, spacing
-│   ├── components.css       # Buttons, cards, modals, toggles, badges, toast notifications
-│   ├── screens.css          # Screen layouts (Dashboard, Monitoring, Alerts, Emergency)
-│   └── animations.css       # Micro-animations, pulses, emergency flashes
-├── js/
-│   ├── app.js               # Main application controller & event bus
-│   ├── state.js             # Reactive central state management engine
-│   ├── router.js            # Client-side hash-less single page router
-│   ├── i18n.js              # Multi-language translation engine (EN, TA, HI, TE, KN, ML)
-│   ├── components.js        # Dynamic HTML component templates
-│   ├── charts.js            # Custom Canvas line chart generator for gas PPM monitoring
-│   ├── mock-data.js         # Telemetry simulator & server database sync
-│   └── screens/             # Modular screen view definitions
-│       ├── splash.js        # App boot screen
-│       ├── onboarding.js    # Slide carousel & language selector
-│       ├── auth.js          # Login, Registration, OTP verification
-│       ├── dashboard.js     # Solenoid valve control & main telemetry status
-│       ├── monitoring.js    # Live telemetry graphs & history
-│       ├── alerts.js        # Alert history & filter list
-│       ├── analytics.js     # Safety score metrics & report exports
-│       ├── devices.js       # SVR unit pairing, WiFi setup, diagnostics
-│       ├── emergency.js     # Critical leak alert view & emergency contacts
-│       ├── settings.js      # Accessibility & user preference settings
-│       ├── family.js        # Family role management & member invitations
-│       └── recipes.js       # Safe cooking assistant helper
-└── android/                 # Native Android Jetpack Compose application source
+## 1. Clone the repository
+
+Copy the HTTPS repository address from the GitHub **Code** button and run:
+
+```bash
+git clone <YOUR-REPOSITORY-URL>
+cd SafeCook-PRO
 ```
 
----
+## 2. Install dependencies
 
-## Setup & Local Development
+```bash
+npm install
+```
 
-### Prerequisites
-* **Node.js**: v18.0.0 or higher
-* **npm**: v9.0.0 or higher
+## 3. Configure environment variables
 
-### Installation Steps
+Create your local environment file from the provided template.
 
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/your-username/safecook-pro.git
-   cd safecook-pro
-   ```
+```bash
+cp .env.example .env
+```
 
-2. **Configure Environment Variables**:
-   ```bash
-   cp .env.example .env
-   ```
+On Windows PowerShell, you can use:
 
-3. **Check Code Integrity**:
-   ```bash
-   npm run check
-   ```
+```powershell
+Copy-Item .env.example .env
+```
 
-4. **Start Local Server**:
-   ```bash
-   npm start
-   ```
-   Open `http://localhost:8080` in your web browser.
+Then open `.env` and configure the required values.
 
----
+**Never commit your `.env` file to GitHub.**
 
-## Environment Variables
+## 4. Run the project checks
 
-SafeCook Pro relies on the following environment variables (see `.env.example`):
+```bash
+npm run check
+```
 
-| Variable | Description | Default / Example |
-| :--- | :--- | :--- |
-| `PORT` | Local preview server port | `8080` |
-| `NODE_ENV` | Application environment | `development` |
-| `DATABASE_PATH` | Path to SQLite database file | `./safecook.db` |
-| `MQTT_BROKER_URL` | IoT MQTT Broker URI for ESP32 connection | `mqtts://broker.safecookpro.com:8883` |
-| `FIREBASE_PROJECT_ID` | Cloud Firebase project identifier | `safecook-pro-dev` |
+## 5. Start the application
+
+```bash
+npm start
+```
+
+Then open:
+
+```text
+http://localhost:8080
+```
+
+in your browser.
 
 ---
 
-## Current Development Status
+# ⚙️ Environment Configuration
 
-* 🟢 **Frontend Web Application**: ~75% complete (Fully responsive UI, PWA support, elderly accessibility controls).
-* 🟡 **Backend Preview Server**: In progress (Local SQLite API operational; Cloud sync in development).
-* 🟡 **ESP32 Firmware & Hardware Integration**: Planned / In progress (Local telemetry simulator active; hardware handshake ready).
-* 🔴 **Production Field Testing & Certification**: Pending.
+The project uses environment variables for configuration.
 
----
+| Variable              | Purpose                     | Example               |
+| --------------------- | --------------------------- | --------------------- |
+| `PORT`                | Local server port           | `8080`                |
+| `NODE_ENV`            | Application environment     | `development`         |
+| `DATABASE_PATH`       | SQLite database location    | `./safecook.db`       |
+| `MQTT_BROKER_URL`     | MQTT broker endpoint        | Your broker URL       |
+| `FIREBASE_PROJECT_ID` | Firebase project identifier | Your Firebase project |
 
-## Roadmap
-
-- [x] Initial UI/UX prototype & design system
-- [x] Elderly-friendly accessibility suite (Font scaling, high contrast, voice feedback)
-- [x] Multi-language support for 6 Indian languages
-- [x] Native Node.js backend server with SQLite storage
-- [ ] Connect physical ESP32-S3 microcontroller with MQ-6 sensor over MQTT
-- [ ] Integrate Firebase Cloud Messaging for instant push notification alerts
-- [ ] Finalize Android Compose mobile client release build
-- [ ] Conduct field testing and third-party safety validation
+See `.env.example` for the configuration template.
 
 ---
 
-## Safety Disclaimer
+# 📊 Development Status
 
-> ⚠️ **IMPORTANT SAFETY NOTICE**: SafeCook Pro is currently a prototype/project implementation. It must NOT be treated as a certified life-safety device or primary gas protection system without comprehensive formal engineering validation, hardware safety testing, and official regulatory certification (such as CE, UL, or BIS certification). Always maintain manual gas safety precautions in your kitchen.
+| Component                      | Status                |
+| ------------------------------ | --------------------- |
+| Web UI                         | 🟢 Active development |
+| Responsive Design              | 🟢 Implemented        |
+| Accessibility Features         | 🟢 Implemented        |
+| Multilingual UI                | 🟢 Implemented        |
+| PWA Support                    | 🟢 Implemented        |
+| Node.js Backend                | 🟢 Implemented        |
+| SQLite Storage                 | 🟢 Implemented        |
+| Telemetry Simulation           | 🟢 Implemented        |
+| ESP32 Hardware Integration     | 🟡 In Progress        |
+| Cloud Synchronization          | 🟡 In Progress        |
+| Android Application            | 🟡 In Progress        |
+| Production Hardware Validation | 🔴 Pending            |
+
+---
+
+# 🗺️ Roadmap
+
+* [x] Build initial UI/UX system
+* [x] Implement responsive interface
+* [x] Add elderly-friendly accessibility controls
+* [x] Add multilingual architecture
+* [x] Implement Node.js backend
+* [x] Add SQLite local storage
+* [x] Add telemetry visualization
+* [ ] Complete ESP32-S3 hardware integration
+* [ ] Connect physical gas sensor hardware
+* [ ] Complete MQTT communication
+* [ ] Complete cloud synchronization
+* [ ] Finalize Android application
+* [ ] Conduct hardware safety testing
+* [ ] Perform field testing
+* [ ] Complete applicable regulatory/certification work
+
+---
+
+# 🔐 Security
+
+SafeCook Pro is designed with security-conscious development practices.
+
+### Current protections
+
+* Sensitive environment files excluded through `.gitignore`
+* Environment variables used for configurable secrets
+* Local database excluded from version control
+* Dependency/build artifacts excluded from Git
+* No credentials should be hard-coded into the source code
+
+### ⚠️ Never commit
+
+```text
+.env
+*.key
+*.pem
+credentials.json
+private configuration files
+local databases containing sensitive user information
+```
+
+If a secret is accidentally committed, **rotate/revoke it immediately** rather than simply deleting the file from the latest commit.
+
+---
+
+# 🧪 Testing & Validation
+
+The project includes code-integrity checks through the npm scripts defined in `package.json`.
+
+Before submitting changes:
+
+```bash
+npm run check
+```
+
+For hardware integration, additional validation should include:
+
+* Sensor accuracy testing
+* False-positive/false-negative analysis
+* Valve response testing
+* Communication failure testing
+* Power failure testing
+* Emergency notification testing
+* Environmental testing
+* Hardware reliability testing
+* Formal safety validation
+
+---
+
+# 🤝 Contributing
+
+Contributions are welcome.
+
+A typical contribution workflow:
+
+```text
+Fork
+  ↓
+Create a feature branch
+  ↓
+Make your changes
+  ↓
+Run tests/checks
+  ↓
+Commit your changes
+  ↓
+Open a Pull Request
+```
+
+Please keep pull requests focused and provide a clear description of the changes.
+
+---
+
+# 📜 License
+
+SafeCook Pro is released under the **MIT License**.
+
+See `LICENSE` for the complete license text.
+
+---
+
+# ⚠️ Safety Disclaimer
+
+> **IMPORTANT:** SafeCook Pro is currently a prototype/project implementation and must not be treated as a certified life-safety device or primary gas-protection system.
+>
+> Any real-world deployment involving gas appliances, automated valves, sensors, or emergency systems requires comprehensive engineering validation, hardware safety testing, failure-mode analysis, appropriate supervision, and applicable regulatory certification.
+>
+> Always follow the manufacturer's safety instructions and normal gas-safety practices.
+
+---
+
+# 🌟 Vision
+
+SafeCook Pro aims to make kitchen safety **smarter, simpler and more accessible**.
+
+The long-term vision is to combine:
+
+**IoT + Automation + Accessibility + Multilingual Design + Safety Analytics**
+
+into an affordable retrofit-oriented safety ecosystem that can help families monitor their cooking environment and respond faster to hazardous situations.
+
+---
+
+<div align="center">
+
+### 🛡️ SafeCook Pro
+
+**Smart safety for every kitchen.**
+
+Built with ❤️ for safer and more accessible homes.
+
+</div>

@@ -91,9 +91,7 @@ The system can integrate:
 
 ---
 
-# 📸 Screenshots
-
-> Screenshots can be added to `docs/screenshots/`.
+## 📸 Screenshots
 
 ### 🏠 Dashboard
 
@@ -106,6 +104,14 @@ The system can integrate:
 ### 🚨 Emergency Mode
 
 ![SafeCook Pro Emergency Mode](docs/screenshots/emergency.png)
+
+### 🍳 Recipes
+
+![SafeCook Pro Recipes](docs/screenshots/recipes.png)
+
+### 📈 Analytics
+
+![SafeCook Pro Analytics](docs/screenshots/analytics.png)
 
 ### ⚙️ Accessibility & Settings
 

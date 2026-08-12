@@ -95,31 +95,40 @@ The system can integrate:
 
 ### 🏠 Dashboard
 
-![SafeCook Pro Dashboard](docs/screenshots/dashboard.png)
+![SafeCook Pro Dashboard](docs/screenshots/dashboard_1.png)
+![SafeCook Pro Dashboard](docs/screenshots/dashboard_2.png)
+![SafeCook Pro Dashboard](docs/screenshots/dashboard_3.png)
 
 ### 📊 Live Monitoring
 
-![SafeCook Pro Monitoring](docs/screenshots/monitoring.png)
+![SafeCook Pro Monitoring](docs/screenshots/monitoring_1.png)
+![SafeCook Pro Monitoring](docs/screenshots/monitoring_2.png)
+![SafeCook Pro Monitoring](docs/screenshots/monitoring_3.png)
 
 ### 🚨 Emergency Mode
 
-![SafeCook Pro Emergency Mode](docs/screenshots/emergency.png)
+![SafeCook Pro Emergency Mode](docs/screenshots/emergency_1.png)
+![SafeCook Pro Emergency Mode](docs/screenshots/emergency_2.png)
 
 ### 🍳 Recipes
 
-![SafeCook Pro Recipes](docs/screenshots/recipes.png)
+![SafeCook Pro Recipes](docs/screenshots/recipes_1.png)
+![SafeCook Pro Recipes](docs/screenshots/recipes_2.png)
 
 ### 📈 Analytics
 
-![SafeCook Pro Analytics](docs/screenshots/analytics.png)
+![SafeCook Pro Analytics](docs/screenshots/analytics_1.png)
+![SafeCook Pro Analytics](docs/screenshots/analytics_2.png)
 
 ### ⚙️ Accessibility & Settings
 
-![SafeCook Pro Settings](docs/screenshots/settings.png)
+![SafeCook Pro Settings](docs/screenshots/settings_1.png)
+![SafeCook Pro Settings](docs/screenshots/settings_2.png)
+![SafeCook Pro Settings](docs/screenshots/settings_3.png)
 
 ### 🌐 Language Selection
 
-![SafeCook Pro Language Selection](docs/screenshots/language.png)
+![SafeCook Pro Language Selection](docs/screenshots/languages_1.png)
 
 > **Tip:** Replace the placeholder screenshots above with screenshots from your actual application.
 

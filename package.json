@@ -1,0 +1,22 @@
+{
+  "name": "safecook-pro",
+  "version": "1.0.0",
+  "description": "SafeCook Pro — IoT LPG Gas Safety & Smart-Valve Retrofit (SVR) Management Suite",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "tunnel": "node tunnel.js",
+    "check": "node --check server.js && node --check js/app.js && node --check js/i18n.js && node --check js/mock-data.js"
+  },
+  "keywords": [
+    "iot",
+    "gas-safety",
+    "lpg-monitoring",
+    "esp32",
+    "smart-valve-retrofit",
+    "safecook-pro"
+  ],
+  "author": "SafeCook Pro Team",
+  "license": "MIT"
+}
+

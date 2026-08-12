@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+
+# Environment and secrets
+.env
+.env.local
+.env.production
+
+# SQLite Databases & Local Storage
+*.db
+safecook.db
+
+# Build outputs
+dist/
+build/
+SafeCookPro.apk
+*.apk
+
+# Android specific
+android/.gradle/
+android/app/build/
+android/build/
+android/captures/
+android/.navigation/
+android/local.properties
+
+# IDE & Editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# Logs & Temporary files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

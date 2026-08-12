@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SafeCook Pro</string>
+    <string name="tagline">Cooking. Safe. Always.</string>
+    
+    <!-- Navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_monitor">Monitor</string>
+    <string name="nav_alerts">Alerts</string>
+    <string name="nav_analytics">Analytics</string>
+    <string name="nav_settings">Settings</string>
+
+    <!-- Onboarding -->
+    <string name="ob_skip">Skip</string>
+    <string name="ob_next">Next</string>
+    <string name="ob_get_started">Get Started</string>
+    <string name="ob_slide1_title">Smart Safety for Your Kitchen</string>
+    <string name="ob_slide1_desc">Real-time LPG gas monitoring, 24 hours a day, 7 days a week.</string>
+    <string name="ob_slide2_title">Instant Leak Detection</string>
+    <string name="ob_slide2_desc">Detects LPG leaks instantly and alerts everyone. Your family stays protected.</string>
+    <string name="ob_slide3_title">Automatic Gas Shutoff</string>
+    <string name="ob_slide3_desc">Valve closes automatically before any harm occurs. Relax — we watch over you.</string>
+
+    <!-- Auth -->
+    <string name="auth_login">Sign In</string>
+    <string name="auth_register">Create Account</string>
+    <string name="auth_email">Email Address</string>
+    <string name="auth_password">Password</string>
+    <string name="auth_name">Full Name</string>
+    <string name="auth_phone">Phone Number</string>
+    <string name="auth_invite">Device Serial / Invite Code</string>
+    <string name="auth_role_owner">Device Owner</string>
+    <string name="auth_role_family">Family Member</string>
+
+    <!-- Dashboard -->
+    <string name="dash_safe">All Systems Normal</string>
+    <string name="dash_safe_sub">Your kitchen is safe and monitored</string>
+    <string name="dash_warning">Vessel Removed</string>
+    <string name="dash_warning_sub">Valve closing in %1$d seconds</string>
+    <string name="dash_emergency">GAS LEAK DETECTED</string>
+    <string name="dash_emergency_sub">Leave the area immediately</string>
+    <string name="action_shut_valve">Shut Valve</string>
+    <string name="action_test_alarm">Test Alarm</string>
+    <string name="action_reset">Reset</string>
+</resources>

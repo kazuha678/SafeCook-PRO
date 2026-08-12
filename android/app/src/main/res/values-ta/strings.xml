@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SafeCook Pro</string>
+    <string name="tagline">சமைப்பு. பாதுகாப்பு. எப்போதும்.</string>
+    
+    <!-- Navigation -->
+    <string name="nav_home">முகப்பு</string>
+    <string name="nav_monitor">கண்காணிப்பு</string>
+    <string name="nav_alerts">எச்சரிக்கை</string>
+    <string name="nav_analytics">பகுப்பாய்வு</string>
+    <string name="nav_settings">அமைப்புகள்</string>
+
+    <!-- Onboarding -->
+    <string name="ob_skip">தவிர்</string>
+    <string name="ob_next">அடுத்து</string>
+    <string name="ob_get_started">தொடங்குவோம்</string>
+    <string name="ob_slide1_title">உங்கள் சமையலறைக்கு ஸ்மார்ட் பாதுகாப்பு</string>
+    <string name="ob_slide1_desc">நிகழ்நேர எல்பிஜி கேஸ் கண்காணிப்பு, 24 மணி நேரமும்.</string>
+    <string name="ob_slide2_title">உடனடி கசிவு கண்டறிதல்</string>
+    <string name="ob_slide2_desc">எல்பிஜி கசிவை உடனடியாக கண்டுபிடித்து அனைவரையும் எச்சரிக்கிறது.</string>
+    <string name="ob_slide3_title">தானியங்கி கேஸ் நிறுத்தம்</string>
+    <string name="ob_slide3_desc">தீங்கு ஏற்படுவதற்கு முன்பே வால்வு தானாக மூடுகிறது.</string>
+
+    <!-- Auth -->
+    <string name="auth_login">உள்நுழைய</string>
+    <string name="auth_register">கணக்கு உருவாக்கு</string>
+    <string name="auth_email">மின்னஞ்சல்</string>
+    <string name="auth_password">கடவுச்சொல்</string>
+    <string name="auth_name">முழு பெயர்</string>
+    <string name="auth_phone">தொலைபேசி எண்</string>
+    <string name="auth_invite">சாதன தொடர் எண் / அழைப்பு குறியீடு</string>
+    <string name="auth_role_owner">சாதன உரிமையாளர்</string>
+    <string name="auth_role_family">குடும்ப உறுப்பினர்</string>
+
+    <!-- Dashboard -->
+    <string name="dash_safe">அனைத்தும் சாதாரணமாக உள்ளது</string>
+    <string name="dash_safe_sub">உங்கள் சமையலறை பாதுகாப்பாக உள்ளது</string>
+    <string name="dash_warning">பாத்திரம் அகற்றப்பட்டது</string>
+    <string name="dash_warning_sub">மின்னஞ்சல் வால்வு %1$d விநாடிகளில் மூடும்</string>
+    <string name="dash_emergency">கேஸ் கசிவு கண்டறியப்பட்டது</string>
+    <string name="dash_emergency_sub">உடனே இந்த இடத்தை விட்டு வெளியேறுங்கள்</string>
+    <string name="action_shut_valve">வால்வு மூடு</string>
+    <string name="action_test_alarm">அலாரம் சோதனை</string>
+    <string name="action_reset">மீட்டமை</string>
+</resources>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SafeCook Pro</string>
+    <string name="tagline">खाना पकाना। सुरक्षित। हमेशा।</string>
+    
+    <!-- Navigation -->
+    <string name="nav_home">होम</string>
+    <string name="nav_monitor">मॉनिटर</string>
+    <string name="nav_alerts">अलर्ट</string>
+    <string name="nav_analytics">विश्लेषण</string>
+    <string name="nav_settings">सेटिंग्स</string>
+
+    <!-- Onboarding -->
+    <string name="ob_skip">छोड़ें</string>
+    <string name="ob_next">आगे</string>
+    <string name="ob_get_started">शुरू करें</string>
+    <string name="ob_slide1_title">आपकी रसोई के लिए स्मार्ट सुरक्षा</string>
+    <string name="ob_slide1_desc">वास्तविक समय एलपीजी गैस निगरानी, 24 घंटे, 7 दिन।</string>
+    <string name="ob_slide2_title">तत्काल गैस रिसाव का पता लगाना</string>
+    <string name="ob_slide2_desc">एलपीजी रिसाव का तुरंत पता लगाता है और सभी को सचेत करता है।</string>
+    <string name="ob_slide3_title">स्वचालित गैस शटऑफ</string>
+    <string name="ob_slide3_desc">कोई भी नुकसान होने से पहले वाल्व अपने आप बंद हो जाता है।</string>
+
+    <!-- Auth -->
+    <string name="auth_login">लॉग इन</string>
+    <string name="auth_register">खाता बनाएं</string>
+    <string name="auth_email">ईमेल पता</string>
+    <string name="auth_password">पासवर्ड</string>
+    <string name="auth_name">पूरा नाम</string>
+    <string name="auth_phone">फ़ोन नंबर</string>
+    <string name="auth_invite">डिवाइस सीरियल / इनवाइट कोड</string>
+    <string name="auth_role_owner">डिवाइस मालिक</string>
+    <string name="auth_role_family">परिवार के सदस्य</string>
+
+    <!-- Dashboard -->
+    <string name="dash_safe">सब कुछ सामान्य है</string>
+    <string name="dash_safe_sub">आपकी रसोई सुरक्षित है</string>
+    <string name="dash_warning">बर्तन हटाया गया</string>
+    <string name="dash_warning_sub">वाल्व %1$d सेकंड में बंद होगा</string>
+    <string name="dash_emergency">गैस रिसाव का पता चला</string>
+    <string name="dash_emergency_sub">तुरंत क्षेत्र छोड़ दें</string>
+    <string name="action_shut_valve">वाल्व बंद करें</string>
+    <string name="action_test_alarm">अलार्म टेस्ट</string>
+    <string name="action_reset">रीसेट</string>
+</resources>

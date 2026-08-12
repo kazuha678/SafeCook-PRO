@@ -36,6 +36,35 @@ The **Smart-Valve Retrofit (SVR)** system attaches to existing domestic LPG gas 
 
 ---
 
+## Screenshots & UI Showcase
+
+### Dashboard & Control Center
+| Home Dashboard | Controls & Telemetry | Quick Actions |
+| :---: | :---: | :---: |
+| [![Dashboard Home](docs/screenshots/dashboard_1.png)](docs/screenshots/dashboard_1.png) | [![Controls](docs/screenshots/dashboard_2.png)](docs/screenshots/dashboard_2.png) | [![Telemetry](docs/screenshots/dashboard_3.png)](docs/screenshots/dashboard_3.png) |
+
+### Real-Time Monitoring & Telemetry
+| Live Sensor Stream | PPM Telemetry History | Range Selector |
+| :---: | :---: | :---: |
+| [![Live Stream](docs/screenshots/monitoring_1.png)](docs/screenshots/monitoring_1.png) | [![Telemetry History](docs/screenshots/monitoring_2.png)](docs/screenshots/monitoring_2.png) | [![Range Selector](docs/screenshots/monitoring_3.png)](docs/screenshots/monitoring_3.png) |
+
+### Emergency Alert Mode & Safety Guide
+| Critical Gas Leak Alert | Safety Instructions Modal |
+| :---: | :---: |
+| [![Emergency Mode](docs/screenshots/emergency_1.png)](docs/screenshots/emergency_1.png) | [![Safety Guide](docs/screenshots/emergency_2.png)](docs/screenshots/emergency_2.png) |
+
+### Multi-Language & Accessibility
+| Language Selection | Accessibility Settings | Profile & Account |
+| :---: | :---: | :---: |
+| [![Languages](docs/screenshots/languages_1.png)](docs/screenshots/languages_1.png) | [![Settings UI](docs/screenshots/settings_1.png)](docs/screenshots/settings_1.png) | [![Account Settings](docs/screenshots/settings_2.png)](docs/screenshots/settings_2.png) |
+
+### Analytics & Safe Cooking Assistant
+| Safety Score Analytics | Consumption Metrics | Recipe Helper |
+| :---: | :---: | :---: |
+| [![Analytics Overview](docs/screenshots/analytics_1.png)](docs/screenshots/analytics_1.png) | [![Consumption](docs/screenshots/analytics_2.png)](docs/screenshots/analytics_2.png) | [![Recipes](docs/screenshots/recipes_1.png)](docs/screenshots/recipes_1.png) |
+
+---
+
 ## System Architecture
 
 ```

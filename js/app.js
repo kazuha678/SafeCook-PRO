@@ -103,6 +103,11 @@ const App = (() => {
     } else {
       document.body.classList.remove('emergency-flash');
     }
+    // Update emergency FAB visual state
+    const fab = document.getElementById('emergency-fab');
+    if (fab) {
+      fab.classList.toggle('state-emergency', status === 'emergency');
+    }
   }
 
   function triggerVoiceAnnounce(msg) {
@@ -506,7 +511,7 @@ const App = (() => {
     const html = `
       <div style="display:flex;flex-direction:column;gap:12px;text-align:left;font-size:0.9375rem;line-height:1.6">
         <div style="background:var(--danger-subtle);color:var(--danger);padding:12px;border-radius:var(--r-md);font-weight:600;text-align:center">
-          DO NOT TURN ON/OFF LIGHT SWITCHES
+          ${I18n.t('emergency.guide.warning')}
         </div>
         <p>${I18n.t('emergency.guide.step1')}</p>
         <p>${I18n.t('emergency.guide.step2')}</p>
@@ -555,11 +560,14 @@ const App = (() => {
       if (f === 'resolved') filtered = list.filter(a => a.acknowledged);
 
       if (filtered.length === 0) {
-        alertsList.innerHTML = Components.emptyState({
-          icon: '✅',
-          title: I18n.t('alerts.noAlerts'),
-          sub: I18n.t('alerts.noAlertsSub'),
-        });
+        // Use the same SVG-based empty state as the initial screen render
+        const shieldSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="width:32px;height:32px"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>`;
+        alertsList.innerHTML = `
+          <div class="alerts-empty">
+            <div class="alerts-empty-icon" aria-hidden="true">${shieldSvg}</div>
+            <div class="alerts-empty-title">${I18n.t('alerts.noAlerts')}</div>
+            <div class="alerts-empty-sub">${I18n.t('alerts.noAlertsSub')}</div>
+          </div>`;
       } else {
         alertsList.innerHTML = filtered.map(a => Components.alertItem(a)).join('');
       }

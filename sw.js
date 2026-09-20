@@ -1,8 +1,8 @@
 /* ============================================================
-   SafeCook Pro — PWA Service Worker
+   SafeCook Pro — PWA Service Worker (Network-First Strategy)
    ============================================================ */
 
-const CACHE_NAME = 'safecook-pro-cache-v4';
+const CACHE_NAME = 'safecook-pro-cache-v9';
 const ASSETS = [
   './',
   'index.html',
@@ -12,6 +12,10 @@ const ASSETS = [
   'css/components.css',
   'css/animations.css',
   'css/screens.css',
+  'css/dashboard.css',
+  'css/monitoring.css',
+  'css/alerts.css',
+  'css/emergency.css',
   'js/i18n.js',
   'js/state.js',
   'js/mock-data.js',
@@ -34,6 +38,7 @@ const ASSETS = [
 ];
 
 self.addEventListener('install', e => {
+  self.skipWaiting();
   e.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
       return cache.addAll(ASSETS);
@@ -51,14 +56,31 @@ self.addEventListener('activate', e => {
           }
         })
       );
-    })
+    }).then(() => self.clients.claim())
   );
 });
 
+// Network-First with Cache Fallback strategy
 self.addEventListener('fetch', e => {
+  if (e.request.method !== 'GET') return;
+
+  // Don't cache chrome-extension or external analytics
+  if (!e.request.url.startsWith('http')) return;
+
   e.respondWith(
-    caches.match(e.request).then(cachedResponse => {
-      return cachedResponse || fetch(e.request);
-    })
+    fetch(e.request)
+      .then(networkResponse => {
+        if (networkResponse && networkResponse.status === 200) {
+          const responseToCache = networkResponse.clone();
+          caches.open(CACHE_NAME).then(cache => {
+            cache.put(e.request, responseToCache);
+          });
+        }
+        return networkResponse;
+      })
+      .catch(() => {
+        // Offline fallback to cache
+        return caches.match(e.request);
+      })
   );
 });

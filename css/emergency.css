@@ -1,0 +1,558 @@
+/* ============================================================
+   SafeCook Pro — Emergency Screen Styles
+   ============================================================
+   Bugs fixed from audit:
+   1. dangerPulse keyframe defined (subtle ring expansion)
+   2. --danger-glow dependency removed
+   3. .emergency-sub hardcoded rgba → uses design-system vars
+   4. .eb-reset text-muted → text-secondary (proper contrast)
+   5. .emergency-screen.active flash throttled — background only,
+      no full-screen flash of entire content
+   ============================================================ */
+
+/* ── Root screen ── */
+.emergency-screen {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  background: var(--em-bg, var(--bg-base));
+}
+
+/* State-specific backgrounds */
+.emergency-screen.state-emergency { --em-bg: #0D0000; }
+.emergency-screen.state-warning   { --em-bg: #0D0A00; }
+.emergency-screen.state-safe      { --em-bg: var(--bg-base); }
+
+/* Active emergency subtle flash — background only, not content */
+.emergency-screen.state-emergency.active {
+  animation: emBgPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes emBgPulse {
+  0%, 100% { background-color: #0D0000; }
+  50%       { background-color: #180000; }
+}
+
+/* ── Background rings (aria-hidden) ── */
+/* FIX: dangerPulse defined as subtle outward ring expansion */
+.emergency-bg-rings {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.emergency-ring {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px solid rgba(239, 68, 68, 0.12);
+  animation: dangerPulse 3s ease-out infinite;
+}
+
+/* FIX: dangerPulse — subtle expand and fade, not jarring flash */
+@keyframes dangerPulse {
+  0%   { opacity: 0.7;  transform: translate(-50%, -50%) scale(0.92); }
+  60%  { opacity: 0.12; transform: translate(-50%, -50%) scale(1.08); }
+  100% { opacity: 0;    transform: translate(-50%, -50%) scale(1.15); }
+}
+
+.emergency-ring:nth-child(1) { width: 200px; height: 200px; animation-delay: 0s; }
+.emergency-ring:nth-child(2) { width: 360px; height: 360px; animation-delay: 0.9s; }
+.emergency-ring:nth-child(3) { width: 520px; height: 520px; animation-delay: 1.8s; }
+
+/* Hide rings in safe state */
+.emergency-screen.state-safe .emergency-ring { display: none; }
+
+/* ── Scrollable content ── */
+.em-scroll {
+  position: relative;
+  z-index: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-md);
+  padding: calc(var(--safe-top) + 20px) var(--sp-md) calc(var(--safe-bottom) + 24px);
+  max-width: 520px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   A. STATUS HEADER
+   ═══════════════════════════════════════════════════════════ */
+.em-status-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  padding: var(--sp-lg) var(--sp-md) var(--sp-md);
+}
+
+.em-status-icon-wrap {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.em-status-icon-wrap svg { width: 36px; height: 36px; }
+
+/* Icon states */
+.state-emergency .em-status-icon-wrap {
+  background: rgba(239, 68, 68, 0.2);
+  color: var(--danger);
+  animation: iconPulse 1.5s ease-in-out infinite;
+}
+.state-warning .em-status-icon-wrap {
+  background: rgba(245, 158, 11, 0.2);
+  color: var(--warning);
+}
+.state-safe .em-status-icon-wrap {
+  background: var(--safe-subtle);
+  color: var(--safe);
+}
+
+@keyframes iconPulse {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.06); }
+}
+
+/* Status label badge */
+.em-status-label {
+  font-size: 0.6875rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 4px 12px;
+  border-radius: var(--r-full);
+}
+.state-emergency .em-status-label {
+  background: rgba(239, 68, 68, 0.2);
+  color: var(--danger);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+}
+.state-warning .em-status-label {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--warning);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+}
+.state-safe .em-status-label {
+  background: var(--safe-subtle);
+  color: var(--safe);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+/* Headline */
+.emergency-headline {
+  font-size: 1.75rem;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+  color: var(--text-primary);
+}
+.state-emergency .emergency-headline { color: var(--danger); }
+.state-warning   .emergency-headline { color: var(--warning); }
+.state-safe      .emergency-headline { color: var(--safe); }
+
+/* FIX: emergency-sub uses design-system var, not hardcoded rgba */
+.emergency-sub {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 300px;
+  white-space: pre-line;
+}
+
+/* Alarm active pill */
+.em-alarm-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  border-radius: var(--r-full);
+  margin-top: 4px;
+}
+.em-alarm-pill-label {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--danger);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* live-dot — preserved class name */
+.live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--danger);
+  animation: liveBlink 1s infinite;
+  flex-shrink: 0;
+}
+@keyframes liveBlink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.25; }
+}
+
+.em-alarm-silenced {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--r-full);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+.em-alarm-silenced svg { width: 14px; height: 14px; }
+
+/* ═══════════════════════════════════════════════════════════
+   B. SAFETY INSTRUCTION
+   ═══════════════════════════════════════════════════════════ */
+.em-instruction-block {
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  border-left: 4px solid var(--danger);
+  border-radius: var(--r-lg);
+  padding: var(--sp-md);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.state-warning .em-instruction-block {
+  background: rgba(245, 158, 11, 0.08);
+  border-color: rgba(245, 158, 11, 0.25);
+  border-left-color: var(--warning);
+}
+
+.em-instruction-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.em-instruction-step-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--r-sm);
+  background: rgba(239, 68, 68, 0.15);
+  color: var(--danger);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.state-warning .em-instruction-step-icon {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--warning);
+}
+.em-instruction-step-icon svg { width: 16px; height: 16px; }
+
+.em-instruction-step-text {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.5;
+  flex: 1;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   C. SYSTEM RESPONSE CARD
+   ═══════════════════════════════════════════════════════════ */
+.em-response-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+.em-response-header {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-sm);
+  padding: 10px var(--sp-md);
+  background: var(--bg-elevated);
+  border-bottom: 1px solid var(--border);
+}
+.em-response-header-label {
+  font-size: 0.6875rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.em-response-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px var(--sp-md);
+  border-bottom: 1px solid var(--border);
+  gap: var(--sp-md);
+}
+.em-response-row:last-child { border-bottom: none; }
+
+.em-response-row-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.em-response-row-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--r-sm);
+  background: var(--bg-elevated);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.em-response-row-icon svg { width: 16px; height: 16px; }
+
+.em-response-row-label {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.em-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: var(--r-full);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.em-status-pill.pill-danger  { background: var(--danger-subtle);  color: var(--danger); }
+.em-status-pill.pill-safe    { background: var(--safe-subtle);    color: var(--safe); }
+.em-status-pill.pill-warning { background: var(--warning-subtle); color: var(--warning); }
+.em-status-pill.pill-muted   { background: var(--bg-elevated);    color: var(--text-secondary); }
+.em-status-pill svg { width: 12px; height: 12px; flex-shrink: 0; }
+
+/* ═══════════════════════════════════════════════════════════
+   D. ACTION BUTTONS
+   emergency-actions class preserved for existing code
+   emergency-btn, eb-call, eb-silence, eb-guide, eb-reset preserved
+   ═══════════════════════════════════════════════════════════ */
+.emergency-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.emergency-btn {
+  width: 100%;
+  min-height: 56px;          /* 56px primary target */
+  border-radius: var(--r-lg);
+  font-size: 1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  font-family: var(--font);
+  letter-spacing: 0.01em;
+}
+.emergency-btn svg { width: 20px; height: 20px; flex-shrink: 0; }
+.emergency-btn:active { transform: scale(0.98); }
+.emergency-btn:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Primary — call */
+.eb-call {
+  background: var(--danger);
+  color: #fff;
+  min-height: 60px;
+  font-size: 1.0625rem;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.35);
+}
+.eb-call:active { box-shadow: 0 2px 6px rgba(239, 68, 68, 0.25); }
+
+/* Secondary — silence */
+.eb-silence {
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  border: 1.5px solid var(--border);
+  min-height: 52px;
+}
+
+/* Tertiary — guide */
+.eb-guide {
+  background: var(--warning-subtle);
+  color: var(--warning);
+  border: 1.5px solid rgba(245, 158, 11, 0.35);
+  min-height: 52px;
+}
+
+/* FIX: eb-reset was text-muted (low contrast) → text-secondary */
+.eb-reset {
+  background: transparent;
+  color: var(--text-secondary);  /* was text-muted — improved contrast */
+  font-size: 0.9375rem;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  min-height: 48px;
+}
+.eb-reset:active { background: var(--bg-elevated); }
+
+/* ═══════════════════════════════════════════════════════════
+   E. EMERGENCY CONTACT CARD
+   ═══════════════════════════════════════════════════════════ */
+.em-contact-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: var(--sp-md);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-md);
+}
+.em-contact-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(239, 68, 68, 0.12);
+  color: var(--danger);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.125rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.em-contact-content { flex: 1; min-width: 0; }
+.em-contact-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.em-contact-relation {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+.em-contact-phone {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-top: 1px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   F. SENSOR TECHNICAL INFO (secondary visual weight)
+   ═══════════════════════════════════════════════════════════ */
+.em-sensor-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.em-sensor-section-label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  padding: 0 2px;
+}
+
+.em-sensor-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.em-sensor-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  flex: 1;
+  min-width: 100px;
+}
+.em-sensor-chip svg { width: 14px; height: 14px; flex-shrink: 0; color: var(--text-muted); }
+.em-sensor-chip-label {
+  font-size: 0.6875rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+.em-sensor-chip-value {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+.em-sensor-chip-value.val-danger  { color: var(--danger); }
+.em-sensor-chip-value.val-warning { color: var(--warning); }
+.em-sensor-chip-value.val-safe    { color: var(--safe); }
+
+/* Safe state info block */
+.em-safe-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--sp-sm);
+  padding: var(--sp-md);
+}
+.em-safe-info-title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+.em-safe-info-sub {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+/* ── Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  /* Disable ALL ring and flash animations */
+  .emergency-bg-rings { display: none; }
+  .emergency-screen.state-emergency.active { animation: none; }
+  .em-status-icon-wrap { animation: none; }
+  .live-dot { animation: none; opacity: 1; }
+  @keyframes emBgPulse { from {} to {} }
+  @keyframes iconPulse { from {} to {} }
+}
+
+/* ── Responsive ── */
+@media (max-width: 420px) {
+  .em-scroll { padding: calc(var(--safe-top) + 12px) 12px calc(var(--safe-bottom) + 20px); }
+  .emergency-headline { font-size: 1.5rem; }
+  .em-sensor-chip { min-width: 80px; padding: 7px 10px; }
+  .em-status-icon-wrap { width: 60px; height: 60px; }
+  .em-status-icon-wrap svg { width: 28px; height: 28px; }
+}
+
+@media (min-width: 600px) {
+  .em-scroll { padding-top: calc(var(--safe-top) + 32px); }
+  .emergency-headline { font-size: 2rem; }
+}

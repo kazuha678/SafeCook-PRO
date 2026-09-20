@@ -1,0 +1,471 @@
+/* ============================================================
+   SafeCook Pro — Alerts Screen Styles
+   Accessibility Pass — v2
+   ============================================================
+   Changes from v1:
+   - filter-pill min-height bumped to 48px (was 40px)
+   - alert-ack-btn min-height bumped to 48px + full-width on mobile
+   - alert-time and alert-action-label use text-secondary (not muted)
+     so they remain readable on both light and dark themes
+   - alert-item left padding offset so content clears the 3px stripe
+   - alerts-list gap increased to 12px for better touch separation
+   - filter-pill font-size increased to 0.9375rem for readability
+   - alert-desc font-size raised to 0.9375rem for elderly comfort
+   - alert-action-text font-size raised to 0.875rem
+   - Desktop responsive padding capped correctly
+   ============================================================ */
+
+/* ── Alerts Root ── */
+.alerts-screen {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  background: var(--bg-base);
+  padding-bottom: calc(var(--nav-h) + var(--safe-bottom) + 28px);
+  animation: screenIn var(--transition-slow) both;
+}
+
+/* ── Alerts Header ── */
+.alerts-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: calc(var(--safe-top) + 12px) var(--sp-md) 12px;
+  background: var(--bg-base);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.alerts-header-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* ── Alerts Body ── */
+.alerts-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-lg);
+  padding: var(--sp-md);
+  max-width: 720px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SAFETY STATUS OVERVIEW BANNER
+   ═══════════════════════════════════════════════════════════ */
+.alerts-status-banner {
+  border-radius: var(--r-xl);
+  border: 1px solid var(--border);
+  background: var(--bg-surface);
+  padding: var(--sp-md);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-md);
+  position: relative;
+  overflow: hidden;
+  transition: border-color var(--transition-slow);
+}
+
+/* Left accent stripe */
+.alerts-status-banner::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+  border-radius: var(--r-xl) 0 0 var(--r-xl);
+  background: var(--border);
+}
+
+.alerts-status-banner.no-alerts::before    { background: var(--safe); }
+.alerts-status-banner.has-critical::before { background: var(--danger); }
+.alerts-status-banner.has-warning::before  { background: var(--warning); }
+.alerts-status-banner.has-unread::before   { background: var(--info); }
+
+.alerts-status-banner.no-alerts    { border-color: rgba(16,185,129,0.3); }
+.alerts-status-banner.has-critical { border-color: rgba(239,68,68,0.35); background: var(--danger-subtle); }
+.alerts-status-banner.has-warning  { border-color: rgba(245,158,11,0.35); }
+
+/* Status banner icon */
+.alerts-status-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.no-alerts    .alerts-status-icon { background: var(--safe-subtle);             color: var(--safe); }
+.has-critical .alerts-status-icon { background: rgba(239,68,68,0.15);           color: var(--danger); }
+.has-warning  .alerts-status-icon { background: var(--warning-subtle);          color: var(--warning); }
+.has-unread   .alerts-status-icon { background: var(--info-subtle);             color: var(--info); }
+.alerts-status-icon svg { width: 24px; height: 24px; }
+
+.alerts-status-content { flex: 1; min-width: 0; }
+
+.alerts-status-headline {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.alerts-status-desc {
+  font-size: 0.875rem;        /* up from 0.8125 — more readable */
+  color: var(--text-secondary);
+  margin-top: 3px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   FILTER PILLS
+   FIX: min-height 48px (was 40px) — meets WCAG 2.5.5 target size
+   FIX: font-size 0.9375rem (was 0.8125rem) — readable at arm's length
+   ═══════════════════════════════════════════════════════════ */
+.filter-pills {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 2px;
+}
+.filter-pills::-webkit-scrollbar { display: none; }
+
+.filter-pill {
+  padding: 11px 18px;          /* vertical bump ensures 48px height */
+  border-radius: var(--r-full);
+  font-size: 0.9375rem;        /* 15px — comfortably readable */
+  font-weight: 600;
+  border: 1.5px solid var(--border);
+  background: var(--bg-elevated);
+  color: var(--text-secondary);
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: var(--transition-fast);
+  cursor: pointer;
+  min-height: 48px;            /* ← 48px touch target */
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.filter-pill:active { opacity: 0.75; transform: scale(0.97); }
+.filter-pill:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.filter-pill.active {
+  background: var(--primary-subtle);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* Contextual filter active states */
+#fp-critical.active {
+  background: var(--danger-subtle);
+  border-color: var(--danger);
+  color: var(--danger);
+}
+#fp-unread.active {
+  background: var(--info-subtle);
+  border-color: var(--info);
+  color: var(--info);
+}
+#fp-resolved.active {
+  background: var(--safe-subtle);
+  border-color: var(--safe);
+  color: var(--safe);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   ALERT ITEMS
+   FIX: padding-left offset so content clears the left stripe
+   FIX: gap between cards 12px (was 8px)
+   ═══════════════════════════════════════════════════════════ */
+.alert-item {
+  display: flex;
+  gap: var(--sp-md);
+  padding: var(--sp-md) var(--sp-md) var(--sp-md) calc(var(--sp-md) + 4px); /* +4px clears stripe */
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  position: relative;
+  overflow: hidden;
+  transition: opacity var(--transition-normal), transform var(--transition-normal);
+  animation: slideInUp 0.35s both;
+}
+
+/* Left accent stripe */
+.alert-item::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+  background: var(--alert-color, var(--info));
+  border-radius: var(--r-lg) 0 0 var(--r-lg);
+}
+
+.alert-item.critical {
+  --alert-color: var(--danger);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+.alert-item.warning {
+  --alert-color: var(--warning);
+  border-color: rgba(245, 158, 11, 0.3);
+}
+.alert-item.info {
+  --alert-color: var(--info);
+}
+
+/* Dismissed animation */
+.alert-item.alert-dismissed {
+  opacity: 0;
+  transform: translateX(48px);
+}
+
+/* Alert icon wrap */
+.alert-icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--r-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: var(--bg-elevated);
+  color: var(--alert-color, var(--info));
+  margin-top: 1px; /* optical alignment with title */
+}
+.alert-icon-wrap svg { width: 22px; height: 22px; }
+
+/* Alert text content */
+.alert-content { flex: 1; min-width: 0; }
+
+.alert-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-xs);
+  flex-wrap: wrap;
+  margin-bottom: 5px;
+}
+
+/* Severity badge — icon + text + color triple communication */
+.alert-severity-badge {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding: 3px 8px;
+  border-radius: var(--r-full);
+}
+.critical .alert-severity-badge { background: var(--danger-subtle);  color: var(--danger); }
+.warning  .alert-severity-badge { background: var(--warning-subtle); color: var(--warning); }
+.info     .alert-severity-badge { background: var(--info-subtle);    color: var(--info); }
+
+/* FIX: alert-time uses text-secondary (not muted) for readability on light theme */
+.alert-time {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);   /* was text-muted — improved contrast */
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* Alert title — large and bold for quick scanning */
+.alert-title {
+  font-size: 1.0625rem;           /* 17px — up from 16px */
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 5px;
+  line-height: 1.3;
+}
+
+/* Alert description — comfortable reading for elderly */
+.alert-desc {
+  font-size: 0.9375rem;           /* 15px — up from 14px */
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
+/* Recommended action block */
+.alert-action-text {
+  font-size: 0.875rem;            /* 14px — up from 13px */
+  color: var(--text-secondary);   /* was text-secondary, confirm correct */
+  line-height: 1.55;
+  padding: 8px 12px;
+  background: var(--bg-elevated);
+  border-radius: var(--r-sm);
+  border-left: 3px solid var(--alert-color, var(--info));
+  margin-bottom: 10px;
+}
+
+/* FIX: action label uses text-secondary (not muted) for light theme contrast */
+.alert-action-label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);   /* was text-muted */
+  margin-bottom: 3px;
+}
+
+/* ── Acknowledge button ──
+   FIX: min-height 48px (was 40px)
+   FIX: full width on narrow screens so touch is easy
+   ── */
+.alert-ack-btn {
+  margin-top: var(--sp-xs);
+  padding: 13px 18px;
+  border-radius: var(--r-md);
+  border: 1.5px solid var(--border);
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  font-size: 0.9375rem;           /* 15px — was 14px */
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: var(--transition-fast);
+  min-height: 48px;               /* ← 48px touch target */
+  cursor: pointer;
+  width: 100%;                    /* full width = easier to tap */
+  justify-content: center;
+}
+.alert-ack-btn svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+.alert-ack-btn:active {
+  background: var(--border);
+  transform: scale(0.98);
+}
+.alert-ack-btn:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Acknowledged state badge */
+.alert-acked-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: var(--safe-subtle);
+  color: var(--safe);
+  border-radius: var(--r-sm);
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-top: var(--sp-xs);
+}
+.alert-acked-badge svg { width: 16px; height: 16px; }
+
+/* ── Section title ── */
+.alerts-section-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  padding: 0 2px;
+}
+
+/* ── Alerts list container
+   FIX: gap 12px (was 8px) — more breathing room between cards
+   ── */
+#alerts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ── Empty state ── */
+.alerts-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-md);
+  padding: var(--sp-xl) var(--sp-md);
+  text-align: center;
+}
+
+.alerts-empty-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--safe-subtle);
+  color: var(--safe);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.alerts-empty-icon svg { width: 32px; height: 32px; }
+
+.alerts-empty-title {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.alerts-empty-sub {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  max-width: 280px;
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .alert-item { animation: none; }
+  .alert-item.alert-dismissed { opacity: 0; transform: none; }
+  .filter-pill:active { transform: none; }
+  .alert-ack-btn:active { transform: none; }
+}
+
+/* ── Responsive: narrow screens (360–412px)
+   - ensure filter pills don't clip
+   - ensure no horizontal overflow on alert cards
+   ── */
+@media (max-width: 420px) {
+  .alerts-body {
+    padding: 12px;
+    gap: 16px;
+  }
+  .filter-pill {
+    padding: 11px 14px;     /* tighter horizontal on 360px — height stays 48px */
+    font-size: 0.875rem;
+  }
+  .alert-item {
+    padding: var(--sp-sm) var(--sp-sm) var(--sp-sm) calc(var(--sp-sm) + 4px);
+    gap: 10px;
+  }
+  .alert-icon-wrap {
+    width: 38px;
+    height: 38px;
+  }
+  .alert-title   { font-size: 1rem; }
+  .alert-desc    { font-size: 0.875rem; }
+}
+
+/* ── Tablet (768px) ── */
+@media (min-width: 768px) {
+  .alerts-body { padding: var(--sp-lg); }
+  .filter-pill { font-size: 0.9375rem; }
+  .alert-ack-btn { width: auto; }   /* revert full-width on wider screens */
+}
+
+/* ── Desktop ── */
+@media (min-width: 960px) {
+  .alerts-body {
+    max-width: 720px;
+    padding: var(--sp-lg);
+  }
+  .alerts-header {
+    padding-left: max(var(--sp-md), calc((100vw - 720px) / 2));
+    padding-right: max(var(--sp-md), calc((100vw - 720px) / 2));
+  }
+  .alert-ack-btn { width: auto; }
+}

@@ -20,6 +20,10 @@
   <link rel="stylesheet" href="css/components.css" />
   <link rel="stylesheet" href="css/animations.css" />
   <link rel="stylesheet" href="css/screens.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+  <link rel="stylesheet" href="css/monitoring.css" />
+  <link rel="stylesheet" href="css/alerts.css" />
+  <link rel="stylesheet" href="css/emergency.css" />
 </head>
 <body>
   <div id="app">
@@ -73,11 +77,11 @@
   </nav>
 
   <!-- Emergency FAB (always visible after login) -->
-  <button id="emergency-fab" class="emergency-fab hidden" aria-label="Emergency - Gas Leak" onclick="App.navigate('emergency')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-      <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
-      <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+  <button id="emergency-fab" class="emergency-fab hidden" aria-label="Emergency Help" onclick="App.navigate('emergency')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.58 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.18 6.18l1.17-.88a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
     </svg>
+    <span>Emergency</span>
   </button>
 
   <!-- Toast notifications -->

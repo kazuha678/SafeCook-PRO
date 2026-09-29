@@ -7,7 +7,9 @@
     <string name="nav_home">Home</string>
     <string name="nav_monitor">Monitor</string>
     <string name="nav_alerts">Alerts</string>
+    <string name="nav_history">History</string>
     <string name="nav_analytics">Analytics</string>
+    <string name="nav_device">Device</string>
     <string name="nav_settings">Settings</string>
 
     <!-- Onboarding -->
@@ -42,4 +44,35 @@
     <string name="action_shut_valve">Shut Valve</string>
     <string name="action_test_alarm">Test Alarm</string>
     <string name="action_reset">Reset</string>
+    <string name="action_verify_safety">Verify Safety</string>
+    <string name="action_silence_alarm">Silence Alarm</string>
+    <string name="action_call_emergency">Call Emergency (112)</string>
+    <string name="em_vessel_removed">VESSEL REMOVED</string>
+    <string name="em_gas_warning">GAS WARNING</string>
+    <string name="em_valve_closing">VALVE CLOSING</string>
+    <string name="em_valve_closed">VALVE CLOSED</string>
+    <string name="em_protocol_title">SAFETY PROTOCOL</string>
+
+    <!-- Recipes -->
+    <string name="nav_recipes">Recipes</string>
+    <string name="recipes_title">Recipes</string>
+    <string name="todays_special">Today\'s Special</string>
+    <string name="todays_special_sub">Something good for today\'s kitchen.</string>
+    <string name="category_veg">VEG</string>
+    <string name="category_non_veg">NON-VEG</string>
+    <string name="recipe_ingredients">Ingredients</string>
+    <string name="recipe_quick_steps">Quick Steps</string>
+    <string name="recipe_kitchen_tip">Kitchen Tip</string>
+    <string name="view_recipe">View Recipe</string>
+    <string name="recipe_prep">prep</string>
+    <string name="recipe_cook">cook</string>
+    <string name="recipe_serves">Serves</string>
+    <string name="recipe_min">min</string>
+
+    <!-- Warning Test -->
+    <string name="warning_test_active">Warning Test Active</string>
+    <string name="warning_test_simulated">This is a simulated safety warning.</string>
+    <string name="warning_test_acknowledge">ACKNOWLEDGE WARNING</string>
+    <string name="warning_test_acknowledged">Warning Acknowledged</string>
+    <string name="warning_test_completed">Test completed successfully.</string>
 </resources>

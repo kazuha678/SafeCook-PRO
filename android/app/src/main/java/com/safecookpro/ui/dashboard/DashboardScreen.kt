@@ -3,147 +3,534 @@ package com.safecookpro.ui.dashboard
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.safecookpro.R
+import com.safecookpro.data.RecipeRepository
+import com.safecookpro.data.model.AppStatus
+import com.safecookpro.data.model.RecipeCategory
+import com.safecookpro.data.model.WarningTestState
+import com.safecookpro.ui.SafeCookViewModel
+import com.safecookpro.ui.components.*
+import com.safecookpro.ui.theme.SafeCookColors
 import kotlinx.coroutines.delay
 
+/**
+ * Refined SafeCook Pro Dashboard
+ * Calm · Clear · Immediate
+ *
+ * Consumes SafeCookViewModel's StateFlow.
+ * Replaces all emoji with accessible Material Icons.
+ */
 @Composable
-fun DashboardScreen(onNavigateToEmergency: () -> Unit) {
-    var gasPpm by remember { mutableStateOf(42) }
-    var valveOpen by remember { mutableStateOf(true) }
-    var vesselPresent by remember { mutableStateOf(true) }
-    var batteryPercent by remember { mutableStateOf(87) }
+fun DashboardScreen(
+    viewModel: SafeCookViewModel,
+    onNavigateToEmergency: () -> Unit,
+    onNavigateToHistory: (() -> Unit)? = null,
+    onNavigateToMonitor: (() -> Unit)? = null,
+    onNavigateToRecipes: (() -> Unit)? = null
+) {
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    // Live Simulator Tick matching web prototype
-    LaunchedEffect(Unit) {
-        while (true) {
-            delay(2000)
-            gasPpm = (gasPpm + (-5..5).random()).coerceIn(20, 450)
-            batteryPercent = (batteryPercent - (0..1).random()).coerceAtLeast(10)
-            
-            if (gasPpm >= 300) {
-                onNavigateToEmergency()
-            }
+    // Auto-navigate to Emergency screen if an actual hazard occurs
+    LaunchedEffect(uiState.appStatus) {
+        if (uiState.appStatus == AppStatus.EMERGENCY) {
+            onNavigateToEmergency()
         }
     }
+
+    // Auto-dismiss the "Warning Acknowledged" confirmation after a brief delay to return to IDLE
+    LaunchedEffect(uiState.warningTestState) {
+        if (uiState.warningTestState == WarningTestState.ACKNOWLEDGED) {
+            delay(3500L)
+            viewModel.dismissWarningTestConfirmation()
+        }
+    }
+
+    val scrollState = rememberScrollState()
 
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
-            .padding(16.dp)
+            .verticalScroll(scrollState)
+            .padding(horizontal = 16.dp, vertical = 16.dp)
     ) {
+        // ── Header ─────────────────────────────────────────────────────────────
         Row(
-            modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 16.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
             Column {
-                Text("Good evening, Govind 👋", fontSize = 14.sp, color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f))
-                Text("SafeCook Pro", fontSize = 24.sp, fontWeight = FontWeight.Bold)
+                Text(
+                    text = "Welcome Back",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                Text(
+                    text = "SafeCook Pro",
+                    style = MaterialTheme.typography.headlineSmall,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
             }
-            Box(
-                modifier = Modifier
-                    .background(MaterialTheme.colorScheme.surface, RoundedCornerShape(20.dp))
-                    .padding(horizontal = 12.dp, vertical = 6.dp)
-            ) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Box(modifier = Modifier.size(8.dp).background(Color.Green, RoundedCornerShape(4.dp)))
-                    Spacer(modifier = Modifier.width(6.dp))
-                    Text("Kitchen - Home", fontSize = 12.sp, fontWeight = FontWeight.Bold)
-                }
-            }
+            ConnectionIndicator(
+                online = uiState.device.online,
+                label = if (uiState.device.online) "Kitchen · Online" else "Kitchen · Offline"
+            )
         }
 
-        // Safety Banner card
+        // ── Primary Safety Anchor ──────────────────────────────────────────────
+        SafetyStatusBadge(
+            status = uiState.appStatus,
+            onClick = {
+                if (uiState.appStatus == AppStatus.EMERGENCY) {
+                    onNavigateToEmergency()
+                } else if (onNavigateToMonitor != null) {
+                    onNavigateToMonitor()
+                }
+            }
+        )
+
+        // ── Warning / Emergency Prompt Strip ──────────────────────────────────
+        if (uiState.warningTestState == WarningTestState.ACTIVE) {
+            Spacer(modifier = Modifier.height(12.dp))
+            WarningTestActiveCard(
+                onAcknowledge = { viewModel.acknowledgeWarningTest() }
+            )
+        } else if (uiState.warningTestState == WarningTestState.ACKNOWLEDGED) {
+            Spacer(modifier = Modifier.height(12.dp))
+            WarningTestAcknowledgedCard(
+                onDismiss = { viewModel.dismissWarningTestConfirmation() }
+            )
+        } else if (uiState.appStatus == AppStatus.WARNING) {
+            Spacer(modifier = Modifier.height(12.dp))
+            EmergencyBanner(
+                title = "Vessel Removed (${uiState.countdown}s)",
+                message = "Burner active without vessel. Valve will close automatically.",
+                actionLabel = "VIEW",
+                onAction = onNavigateToEmergency
+            )
+        }
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        // ── Kitchen Status (2×2 Grid) ──────────────────────────────────────────
+        SectionHeader(
+            title = "Kitchen Status",
+            actionText = if (onNavigateToMonitor != null) "Full Telemetry →" else null,
+            onActionClick = onNavigateToMonitor
+        )
+
+        val gasColor = when {
+            uiState.sensor.gasLevelPpm >= 300 -> SafeCookColors.crimson
+            uiState.sensor.gasLevelPpm >= 100 -> SafeCookColors.amber
+            else -> SafeCookColors.emerald
+        }
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            // 1. GAS
+            StatusTile(
+                label = "Gas Concentration",
+                value = "${uiState.sensor.gasLevelPpm} PPM",
+                icon = Icons.Default.LocalFireDepartment,
+                statusColor = gasColor,
+                sublabel = if (uiState.sensor.gasLevelPpm < 100) "Normal level" else "Elevated",
+                modifier = Modifier.weight(1f),
+                onClick = onNavigateToMonitor
+            )
+            // 2. VESSEL
+            StatusTile(
+                label = "Cookware Vessel",
+                value = if (uiState.sensor.vesselPresent) "Present" else "Absent",
+                icon = Icons.Default.SoupKitchen,
+                statusColor = if (uiState.sensor.vesselPresent) SafeCookColors.emerald else SafeCookColors.amber,
+                sublabel = if (uiState.sensor.vesselPresent) "On burner" else "Removed",
+                modifier = Modifier.weight(1f)
+            )
+        }
+
+        Spacer(modifier = Modifier.height(12.dp))
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            // 3. BURNER
+            StatusTile(
+                label = "Burner State",
+                value = if (uiState.sensor.burnerActive) "Flame Active" else "Flame Off",
+                icon = Icons.Default.Whatshot,
+                statusColor = if (uiState.sensor.burnerActive) SafeCookColors.emerald else MaterialTheme.colorScheme.onSurfaceVariant,
+                sublabel = if (uiState.sensor.burnerActive) "Monitored" else "Standby",
+                modifier = Modifier.weight(1f)
+            )
+            // 4. VALVE
+            StatusTile(
+                label = "Gas Valve",
+                value = if (uiState.sensor.valveOpen) "Open" else "Closed",
+                icon = if (uiState.sensor.valveOpen) Icons.Default.LockOpen else Icons.Default.Lock,
+                statusColor = if (uiState.sensor.valveOpen) SafeCookColors.emerald else SafeCookColors.amber,
+                sublabel = if (uiState.sensor.valveOpen) "Gas flowing" else "Safety shutoff",
+                modifier = Modifier.weight(1f)
+            )
+        }
+
+        Spacer(modifier = Modifier.height(14.dp))
+
+        // ── Secondary Telemetry (Temperature & Battery) ──────────────────────
         Card(
-            modifier = Modifier.fillMaxWidth().padding(bottom = 20.dp),
-            shape = RoundedCornerShape(16.dp),
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.15f))
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(14.dp),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+            border = CardDefaults.outlinedCardBorder().copy(
+                brush = androidx.compose.ui.graphics.SolidColor(MaterialTheme.colorScheme.outlineVariant)
+            )
         ) {
             Row(
-                modifier = Modifier.padding(16.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 12.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text("✅", fontSize = 32.sp)
-                Spacer(modifier = Modifier.width(16.dp))
-                Column {
-                    Text("All Systems Normal", fontSize = 18.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
-                    Text("Your kitchen is safe and monitored", fontSize = 14.sp, color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f))
+                // Surface Temperature
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(
+                        imageVector = Icons.Default.DeviceThermostat,
+                        contentDescription = "Temperature",
+                        tint = SafeCookColors.cyan,
+                        modifier = Modifier.size(18.dp)
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Column {
+                        Text(
+                            text = "Surface Temp",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                        Text(
+                            text = "${String.format("%.1f", uiState.sensor.temperature)} °C",
+                            style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                    }
+                }
+
+                Divider(
+                    modifier = Modifier.width(1.dp).height(28.dp),
+                    color = MaterialTheme.colorScheme.outlineVariant
+                )
+
+                // Backup Battery
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(
+                        imageVector = Icons.Default.BatteryChargingFull,
+                        contentDescription = "Battery",
+                        tint = if (uiState.sensor.batteryPercent > 20) SafeCookColors.emerald else SafeCookColors.amber,
+                        modifier = Modifier.size(18.dp)
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Column {
+                        Text(
+                            text = "Backup Battery",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                        Text(
+                            text = "${uiState.sensor.batteryPercent}% (Mains Active)",
+                            style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                    }
                 }
             }
         }
 
-        Text("Quick Actions", fontSize = 18.sp, fontWeight = FontWeight.Bold, modifier = Modifier.padding(bottom = 12.dp))
+        Spacer(modifier = Modifier.height(24.dp))
+
+        // ── Safety Quick Actions ───────────────────────────────────────────────
+        SectionHeader(title = "Safety Controls")
+
         Row(
-            modifier = Modifier.fillMaxWidth().padding(bottom = 24.dp),
-            horizontalArrangement = Arrangement.SpaceBetween
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             Button(
-                onClick = { valveOpen = false },
-                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error)
+                onClick = { viewModel.shutValve() },
+                modifier = Modifier.weight(1f),
+                colors = ButtonDefaults.buttonColors(containerColor = SafeCookColors.crimson),
+                shape = RoundedCornerShape(12.dp)
             ) {
-                Text("🔒 Shut Valve")
+                Icon(
+                    imageVector = Icons.Default.Lock,
+                    contentDescription = null,
+                    modifier = Modifier.size(16.dp)
+                )
+                Spacer(modifier = Modifier.width(6.dp))
+                Text("Shut Valve", style = MaterialTheme.typography.labelMedium)
             }
+
             Button(
-                onClick = { gasPpm = 350 },
-                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.secondary)
+                onClick = { viewModel.startWarningTest() },
+                modifier = Modifier.weight(1f),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = if (uiState.warningTestState == WarningTestState.ACTIVE) SafeCookColors.amber.copy(alpha = 0.2f) else MaterialTheme.colorScheme.surfaceVariant
+                ),
+                shape = RoundedCornerShape(12.dp)
             ) {
-                Text("🚨 Test Leak")
+                Icon(
+                    imageVector = Icons.Default.NotificationImportant,
+                    contentDescription = null,
+                    tint = SafeCookColors.amber,
+                    modifier = Modifier.size(16.dp)
+                )
+                Spacer(modifier = Modifier.width(6.dp))
+                Text("Test Alert", color = MaterialTheme.colorScheme.onSurface, style = MaterialTheme.typography.labelMedium)
             }
-            Button(
-                onClick = { gasPpm = 42; valveOpen = true; vesselPresent = true },
-                colors = ButtonDefaults.buttonColors(containerColor = Color.Gray)
+
+            OutlinedButton(
+                onClick = { viewModel.resetEmergency() },
+                modifier = Modifier.weight(1f),
+                shape = RoundedCornerShape(12.dp)
             ) {
-                Text("🔄 Reset")
+                Icon(
+                    imageVector = Icons.Default.Refresh,
+                    contentDescription = null,
+                    modifier = Modifier.size(16.dp)
+                )
+                Spacer(modifier = Modifier.width(6.dp))
+                Text("Reset", style = MaterialTheme.typography.labelMedium)
             }
         }
 
-        Text("Sensor Readings", fontSize = 18.sp, fontWeight = FontWeight.Bold, modifier = Modifier.padding(bottom = 12.dp))
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(2),
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp),
-            modifier = Modifier.weight(1f)
+        Spacer(modifier = Modifier.height(24.dp))
+
+        // ── Recent Activity / History Preview ──────────────────────────────────
+        SectionHeader(
+            title = "Recent Activity",
+            actionText = if (onNavigateToHistory != null) "View All →" else null,
+            onActionClick = onNavigateToHistory
+        )
+
+        if (uiState.recentAlerts.isEmpty()) {
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(12.dp),
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
+            ) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(24.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = "No recent safety incidents",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+            }
+        } else {
+            Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                uiState.recentAlerts.take(2).forEach { event ->
+                    TimelineEventItem(event = event)
+                }
+            }
+        }
+
+        // ── Today's Special Supporting Section ────────────────────────────────
+        if (onNavigateToRecipes != null) {
+            Spacer(modifier = Modifier.height(24.dp))
+            SectionHeader(
+                title = stringResource(R.string.todays_special),
+                actionText = stringResource(R.string.view_recipe) + " →",
+                onActionClick = onNavigateToRecipes
+            )
+            val todayRecipe = remember { RecipeRepository.todaysSpecial(RecipeCategory.VEG) }
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { onNavigateToRecipes() },
+                shape = RoundedCornerShape(14.dp),
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                border = CardDefaults.outlinedCardBorder().copy(
+                    brush = androidx.compose.ui.graphics.SolidColor(MaterialTheme.colorScheme.outlineVariant)
+                )
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp, vertical = 14.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Column(modifier = Modifier.weight(1f)) {
+                        Text(
+                            text = todayRecipe.name,
+                            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold),
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Text(
+                            text = "${todayRecipe.prepMinutes} min prep · ${todayRecipe.cookMinutes} min cook",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                    TextButton(
+                        onClick = onNavigateToRecipes,
+                        modifier = Modifier.heightIn(min = 48.dp)
+                    ) {
+                        Text(
+                            text = stringResource(R.string.view_recipe),
+                            color = SafeCookColors.emerald,
+                            fontWeight = FontWeight.SemiBold
+                        )
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+    }
+}
+
+@Composable
+private fun WarningTestActiveCard(
+    onAcknowledge: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Card(
+        modifier = modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = SafeCookColors.amber.copy(alpha = 0.12f)),
+        border = CardDefaults.outlinedCardBorder().copy(
+            brush = androidx.compose.ui.graphics.SolidColor(SafeCookColors.amber)
+        )
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
         ) {
-            item {
-                SensorGridItem("🔥 Gas Level", "$gasPpm PPM", if (gasPpm < 100) "Safe level" else "Elevated", if (gasPpm < 100) Color.Green else Color.Red)
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Warning,
+                    contentDescription = "Warning",
+                    tint = SafeCookColors.amber,
+                    modifier = Modifier.size(28.dp)
+                )
+                Spacer(modifier = Modifier.width(12.dp))
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        text = stringResource(R.string.warning_test_active),
+                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                    Spacer(modifier = Modifier.height(2.dp))
+                    Text(
+                        text = stringResource(R.string.warning_test_simulated),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
             }
-            item {
-                SensorGridItem("🔌 Valve", if (valveOpen) "Open" else "Closed", if (valveOpen) "Gas flowing" else "Gas blocked", if (valveOpen) Color.Green else Color.Red)
-            }
-            item {
-                SensorGridItem("🫕 Vessel", if (vesselPresent) "Present" else "Missing", if (vesselPresent) "On burner" else "Removed", Color.Green)
-            }
-            item {
-                SensorGridItem("🔋 Battery", "$batteryPercent%", "Backup power", Color.Green)
+
+            Spacer(modifier = Modifier.height(14.dp))
+
+            Button(
+                onClick = onAcknowledge,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .heightIn(min = 48.dp),
+                shape = RoundedCornerShape(12.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = SafeCookColors.amber,
+                    contentColor = Color.Black
+                )
+            ) {
+                Icon(
+                    imageVector = Icons.Default.CheckCircle,
+                    contentDescription = null,
+                    modifier = Modifier.size(18.dp)
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(
+                    text = stringResource(R.string.warning_test_acknowledge),
+                    style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Bold)
+                )
             }
         }
     }
 }
 
 @Composable
-fun SensorGridItem(label: String, value: String, sub: String, color: Color) {
+private fun WarningTestAcknowledgedCard(
+    onDismiss: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     Card(
-        modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(12.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
+        modifier = modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = SafeCookColors.emerald.copy(alpha = 0.12f)),
+        border = CardDefaults.outlinedCardBorder().copy(
+            brush = androidx.compose.ui.graphics.SolidColor(SafeCookColors.emerald)
+        )
     ) {
-        Column(modifier = Modifier.padding(16.dp)) {
-            Text(label, fontSize = 14.sp, color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f))
-            Spacer(modifier = Modifier.height(4.dp))
-            Text(value, fontSize = 20.sp, fontWeight = FontWeight.ExtraBold, color = color)
-            Spacer(modifier = Modifier.height(2.dp))
-            Text(sub, fontSize = 12.sp, color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f))
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                imageVector = Icons.Default.CheckCircle,
+                contentDescription = "Confirmed",
+                tint = SafeCookColors.emerald,
+                modifier = Modifier.size(28.dp)
+            )
+            Spacer(modifier = Modifier.width(12.dp))
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = stringResource(R.string.warning_test_acknowledged),
+                    style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                    color = SafeCookColors.emerald
+                )
+                Spacer(modifier = Modifier.height(2.dp))
+                Text(
+                    text = stringResource(R.string.warning_test_completed),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+            }
+            TextButton(
+                onClick = onDismiss,
+                modifier = Modifier.heightIn(min = 48.dp)
+            ) {
+                Text("OK", fontWeight = FontWeight.Bold, color = SafeCookColors.emerald)
+            }
         }
     }
 }

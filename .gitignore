@@ -17,6 +17,7 @@ SafeCookPro.apk
 *.apk
 
 # Android specific
+.gradle/
 android/.gradle/
 android/app/build/
 android/build/

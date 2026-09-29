@@ -20,7 +20,9 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.SafeCookPro">
+            android:configChanges="locale|layoutDirection"
+            android:theme="@style/Theme.SafeCookPro"
+            android:localeConfig="@xml/locale_config">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

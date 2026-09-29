@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SafeCook Pro</string>
+    <string name="tagline">ಅಡುಗೆ. ಸುರಕ್ಷತೆ. ಯಾವಾಗಲೂ.</string>
+    
+    <!-- Navigation -->
+    <string name="nav_home">ಮುಖಪುಟ</string>
+    <string name="nav_monitor">ಮಾನಿಟರ್</string>
+    <string name="nav_alerts">ಎಚ್ಚರಿಕೆಗಳು</string>
+    <string name="nav_history">ಇತಿಹಾಸ</string>
+    <string name="nav_analytics">ವಿಶ್ಲೇಷಣೆ</string>
+    <string name="nav_device">ಸಾಧನ</string>
+    <string name="nav_settings">ಸೆಟ್ಟಿಂಗ್‌ಗಳು</string>
+
+    <!-- Onboarding -->
+    <string name="ob_skip">ಬಿಟ್ಟುಬಿಡಿ</string>
+    <string name="ob_next">ಮುಂದೆ</string>
+    <string name="ob_get_started">ಪ್ರಾರಂಭಿಸಿ</string>
+    <string name="ob_slide1_title">ನಿಮ್ಮ ಅಡುಗೆಮನೆಗೆ ಸ್ಮಾರ್ಟ್ ಸುರಕ್ಷತೆ</string>
+    <string name="ob_slide1_desc">ನೈಜ-ಸಮಯದ ಎಲ್‌ಪಿಜಿ ಅನಿಲ ಮೇಲ್ವಿಚಾರಣೆ, 24 ಗಂಟೆಗಳು, ವಾರದ 7 ದಿನಗಳು.</string>
+    <string name="ob_slide2_title">ತಕ್ಷಣದ ಸೋರಿಕೆ ಪತ್ತೆ</string>
+    <string name="ob_slide2_desc">ಎಲ್‌ಪಿಜಿ ಸೋರಿಕೆಯನ್ನು ತಕ್ಷಣವೇ ಪತ್ತೆಹಚ್ಚಿ ಎಲ್ಲರನ್ನೂ ಎಚ್ಚರಿಸುತ್ತದೆ. ನಿಮ್ಮ ಕುಟುಂಬ ಸುರಕ್ಷಿತವಾಗಿರುತ್ತದೆ.</string>
+    <string name="ob_slide3_title">ಸ್ವಯಂಚಾಲಿತ ಅನಿಲ ಸ್ಥಗಿತ</string>
+    <string name="ob_slide3_desc">ಹಾನಿ ಸಂಭವಿಸುವ ಮುನ್ನವೇ ವಾಲ್ವ್ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಮುಚ್ಚುತ್ತದೆ. ನಿರಾಳವಾಗಿರಿ.</string>
+
+    <!-- Auth -->
+    <string name="auth_login">ಸೈನ್ ಇನ್</string>
+    <string name="auth_register">ಖಾತೆ ರಚಿಸಿ</string>
+    <string name="auth_email">ಇಮೇಲ್ ವಿಳಾಸ</string>
+    <string name="auth_password">ಪಾಸ್‌ವರ್ಡ್</string>
+    <string name="auth_name">ಪೂರ್ಣ ಹೆಸರು</string>
+    <string name="auth_phone">ಫೋನ್ ಸಂಖ್ಯೆ</string>
+    <string name="auth_invite">ಸಾಧನದ ಸರಣಿ ಸಂಖ್ಯೆ / ಆಹ್ವಾನ ಕೋಡ್</string>
+    <string name="auth_role_owner">ಸಾಧನದ ಮಾಲೀಕರು</string>
+    <string name="auth_role_family">ಕುಟುಂಬದ ಸದಸ್ಯರು</string>
+
+    <!-- Dashboard & Safety -->
+    <string name="dash_safe">ಎಲ್ಲವೂ ಸಹಜವಾಗಿದೆ</string>
+    <string name="dash_safe_sub">ನಿಮ್ಮ ಅಡುಗೆಮನೆ ಸುರಕ್ಷಿತವಾಗಿದೆ</string>
+    <string name="dash_warning">ಪಾತ್ರೆ ತೆಗೆಯಲಾಗಿದೆ</string>
+    <string name="dash_warning_sub">ವಾಲ್ವ್ %1$d ಸೆಕೆಂಡುಗಳಲ್ಲಿ ಮುಚ್ಚುತ್ತದೆ</string>
+    <string name="dash_emergency">ಅನಿಲ ಸೋರಿಕೆ ಪತ್ತೆಯಾಗಿದೆ</string>
+    <string name="dash_emergency_sub">ತಕ್ಷಣ ಈ ಪ್ರದೇಶವನ್ನು ತೊರೆಯಿರಿ</string>
+    <string name="action_shut_valve">ವಾಲ್ವ್ ಮುಚ್ಚಿ</string>
+    <string name="action_test_alarm">ಅಲಾರಾಂ ಪರೀಕ್ಷೆ</string>
+    <string name="action_reset">ಮರುಹೊಂದಿಸಿ</string>
+    <string name="action_verify_safety">ಸುರಕ್ಷತೆಯನ್ನು ದೃಢೀಕರಿಸಿ</string>
+    <string name="action_silence_alarm">ಅಲಾರಾಂ ನಿಶ್ಯಬ್ದಗೊಳಿಸಿ</string>
+    <string name="action_call_emergency">ತುರ್ತು ಕರೆ (112)</string>
+    <string name="em_vessel_removed">ಪಾತ್ರೆ ತೆಗೆಯಲಾಗಿದೆ</string>
+    <string name="em_gas_warning">ಅನಿಲ ಎಚ್ಚರಿಕೆ</string>
+    <string name="em_valve_closing">ವಾಲ್ವ್ ಮುಚ್ಚಲಾಗುತ್ತಿದೆ</string>
+    <string name="em_valve_closed">ವಾಲ್ವ್ ಮುಚ್ಚಲಾಗಿದೆ</string>
+    <string name="em_protocol_title">ಸುರಕ್ಷತಾ ನಿಯಮಗಳು</string>
+
+    <!-- Recipes -->
+    <string name="nav_recipes">ಪಾಕವಿಧಾನಗಳು</string>
+    <string name="recipes_title">ಪಾಕವಿಧಾನಗಳು</string>
+    <string name="todays_special">ಇಂದಿನ ವಿಶೇಷ</string>
+    <string name="todays_special_sub">ಇಂದಿನ ಅಡುಗೆಮನೆಗೆ ಒಂದು ಉತ್ತಮ ಉಪಾಯ.</string>
+    <string name="category_veg">ಸಸ್ಯಾಹಾರ</string>
+    <string name="category_non_veg">ಮಾಂಸಾಹಾರ</string>
+    <string name="recipe_ingredients">ಬೇಕಾಗುವ ಸಾಮಗ್ರಿಗಳು</string>
+    <string name="recipe_quick_steps">ತ್ವರಿತ ಹಂತಗಳು</string>
+    <string name="recipe_kitchen_tip">ಅಡುಗೆ ಸಲಹೆ</string>
+    <string name="view_recipe">ರೆಸಿಪಿ ನೋಡಿ</string>
+    <string name="recipe_prep">ಸಿದ್ಧತೆ</string>
+    <string name="recipe_cook">ಅಡುಗೆ</string>
+    <string name="recipe_serves">ಬಡಿಸುವಿಕೆ</string>
+    <string name="recipe_min">ನಿಮಿಷ</string>
+
+    <!-- Warning Test -->
+    <string name="warning_test_active">ಎಚ್ಚರಿಕೆ ಪರೀಕ್ಷೆ ಸಕ್ರಿಯವಾಗಿದೆ</string>
+    <string name="warning_test_simulated">ಇದು ಅಣಕು ಸುರಕ್ಷತಾ ಎಚ್ಚರಿಕೆಯಾಗಿದೆ.</string>
+    <string name="warning_test_acknowledge">ಎಚ್ಚರಿಕೆಯನ್ನು ದೃಢೀಕರಿಸಿ</string>
+    <string name="warning_test_acknowledged">ಎಚ್ಚರಿಕೆ ದೃಢೀಕರಿಸಲಾಗಿದೆ</string>
+    <string name="warning_test_completed">ಪರೀಕ್ಷೆ ಯಶಸ್ವಿಯಾಗಿ ಪೂರ್ಣಗೊಂಡಿದೆ.</string>
+</resources>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SafeCook Pro</string>
+    <string name="tagline">వంట. రక్షణ. ఎల్లప్పుడూ.</string>
+    
+    <!-- Navigation -->
+    <string name="nav_home">హోమ్</string>
+    <string name="nav_monitor">మానిటర్</string>
+    <string name="nav_alerts">హెచ్చరికలు</string>
+    <string name="nav_history">చరిత్ర</string>
+    <string name="nav_analytics">విశ్లేషణ</string>
+    <string name="nav_device">పరికరం</string>
+    <string name="nav_settings">సెట్టింగ్‌లు</string>
+
+    <!-- Onboarding -->
+    <string name="ob_skip">దాటవేయి</string>
+    <string name="ob_next">తరువాత</string>
+    <string name="ob_get_started">ప్రారంభించండి</string>
+    <string name="ob_slide1_title">మీ వంటగదికి స్మార్ట్ భద్రత</string>
+    <string name="ob_slide1_desc">నిజ-సమయ LPG గ్యాస్ పర్యవేక్షణ, 24 గంటలు, వారంలో 7 రోజులు.</string>
+    <string name="ob_slide2_title">తక్షణ లీక్ గుర్తింపు</string>
+    <string name="ob_slide2_desc">LPG లీక్‌ను తక్షణమే గుర్తించి అందరినీ హెచ్చరిస్తుంది. మీ కుటుంబం సురక్షితంగా ఉంటుంది.</string>
+    <string name="ob_slide3_title">ఆటోమేటిక్ గ్యాస్ షటాఫ్</string>
+    <string name="ob_slide3_desc">ప్రమాదం జరగకముందే వాల్వ్ స్వయంచాలకంగా మూసుకుపోతుంది. ప్రశాంతంగా ఉండండి.</string>
+
+    <!-- Auth -->
+    <string name="auth_login">సైన్ ఇన్</string>
+    <string name="auth_register">ఖాతాను సృష్టించండి</string>
+    <string name="auth_email">ఇమెయిల్ చిరునామా</string>
+    <string name="auth_password">పాస్‌వర్డ్</string>
+    <string name="auth_name">పూర్తి పేరు</string>
+    <string name="auth_phone">ఫోన్ నంబర్</string>
+    <string name="auth_invite">పరికర క్రమ సంఖ్య / ఆహ్వాన కోడ్</string>
+    <string name="auth_role_owner">పరికర యజమాని</string>
+    <string name="auth_role_family">కుటుంబ సభ్యుడు</string>
+
+    <!-- Dashboard & Safety -->
+    <string name="dash_safe">అన్నీ సాధారణంగా ఉన్నాయి</string>
+    <string name="dash_safe_sub">మీ వంటగది సురక్షితంగా మరియు పర్యవేక్షణలో ఉంది</string>
+    <string name="dash_warning">పాత్ర తొలగించబడింది</string>
+    <string name="dash_warning_sub">వాల్వ్ %1$d సెకన్లలో మూసివేయబడుతుంది</string>
+    <string name="dash_emergency">గ్యాస్ లీక్ గుర్తించబడింది</string>
+    <string name="dash_emergency_sub">వెంటనే ఆ ప్రాంతం నుండి బయటకు వెళ్ళండి</string>
+    <string name="action_shut_valve">వాల్వ్ మూసివేయి</string>
+    <string name="action_test_alarm">అలారం టెస్ట్</string>
+    <string name="action_reset">రీసెట్</string>
+    <string name="action_verify_safety">భద్రతను నిర్ధారించండి</string>
+    <string name="action_silence_alarm">అలారం నిశ్శబ్దం చేయండి</string>
+    <string name="action_call_emergency">అత్యవసర కాల్ (112)</string>
+    <string name="em_vessel_removed">పాత్ర తొలగించబడింది</string>
+    <string name="em_gas_warning">గ్యాస్ హెచ్చరిక</string>
+    <string name="em_valve_closing">వాల్వ్ మూసివేయబడుతోంది</string>
+    <string name="em_valve_closed">వాల్వ్ మూసివేయబడింది</string>
+    <string name="em_protocol_title">భద్రతా నియమాలు</string>
+
+    <!-- Recipes -->
+    <string name="nav_recipes">వంటకాలు</string>
+    <string name="recipes_title">వంటకాలు</string>
+    <string name="todays_special">నేటి ప్రత్యేకం</string>
+    <string name="todays_special_sub">నేటి వంటగదికి ఒక మంచి ఆలోచన.</string>
+    <string name="category_veg">శాఖాహారం</string>
+    <string name="category_non_veg">మాంసాహారం</string>
+    <string name="recipe_ingredients">కావలసిన పదార్థాలు</string>
+    <string name="recipe_quick_steps">సులభమైన దశలు</string>
+    <string name="recipe_kitchen_tip">వంటగది చిట్కా</string>
+    <string name="view_recipe">రెసిపీ చూడండి</string>
+    <string name="recipe_prep">సిద్ధం</string>
+    <string name="recipe_cook">వంట</string>
+    <string name="recipe_serves">సర్వింగ్స్</string>
+    <string name="recipe_min">నిమిషాలు</string>
+
+    <!-- Warning Test -->
+    <string name="warning_test_active">హెచ్చరిక పరీక్ష సక్రియంగా ఉంది</string>
+    <string name="warning_test_simulated">ఇది అనుకరించబడిన భద్రతా హెచ్చరిక.</string>
+    <string name="warning_test_acknowledge">హెచ్చరికను గుర్తించండి</string>
+    <string name="warning_test_acknowledged">హెచ్చరిక గుర్తించబడింది</string>
+    <string name="warning_test_completed">పరీక్ష విజయవంతంగా పూర్తయింది.</string>
+</resources>

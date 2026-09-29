@@ -7,7 +7,9 @@
     <string name="nav_home">होम</string>
     <string name="nav_monitor">मॉनिटर</string>
     <string name="nav_alerts">अलर्ट</string>
+    <string name="nav_history">इतिहास</string>
     <string name="nav_analytics">विश्लेषण</string>
+    <string name="nav_device">डिवाइस</string>
     <string name="nav_settings">सेटिंग्स</string>
 
     <!-- Onboarding -->
@@ -42,4 +44,35 @@
     <string name="action_shut_valve">वाल्व बंद करें</string>
     <string name="action_test_alarm">अलार्म टेस्ट</string>
     <string name="action_reset">रीसेट</string>
+    <string name="action_verify_safety">सुरक्षा की पुष्टि करें</string>
+    <string name="action_silence_alarm">अलार्म बंद करें</string>
+    <string name="action_call_emergency">आपातकालीन कॉल (112)</string>
+    <string name="em_vessel_removed">बर्तन हटाया गया</string>
+    <string name="em_gas_warning">गैस चेतावनी</string>
+    <string name="em_valve_closing">वाल्व बंद हो रहा है</string>
+    <string name="em_valve_closed">वाल्व बंद है</string>
+    <string name="em_protocol_title">सुरक्षा निर्देश</string>
+
+    <!-- Recipes -->
+    <string name="nav_recipes">व्यंजन</string>
+    <string name="recipes_title">व्यंजन</string>
+    <string name="todays_special">आज की खास डिश</string>
+    <string name="todays_special_sub">आज की रसोई के लिए एक बढ़िया विचार।</string>
+    <string name="category_veg">शाकाहारी</string>
+    <string name="category_non_veg">मांसाहारी</string>
+    <string name="recipe_ingredients">सामग्री</string>
+    <string name="recipe_quick_steps">त्वरित चरण</string>
+    <string name="recipe_kitchen_tip">रसोई टिप</string>
+    <string name="view_recipe">रेसिपी देखें</string>
+    <string name="recipe_prep">तैयारी</string>
+    <string name="recipe_cook">पकाना</string>
+    <string name="recipe_serves">परोसें</string>
+    <string name="recipe_min">मिनट</string>
+
+    <!-- Warning Test -->
+    <string name="warning_test_active">चेतावनी परीक्षण सक्रिय है</string>
+    <string name="warning_test_simulated">यह एक सिम्युलेटेड सुरक्षा चेतावनी है।</string>
+    <string name="warning_test_acknowledge">चेतावनी स्वीकार करें</string>
+    <string name="warning_test_acknowledged">चेतावनी स्वीकार की गई</string>
+    <string name="warning_test_completed">परीक्षण सफलतापूर्वक पूर्ण हुआ।</string>
 </resources>

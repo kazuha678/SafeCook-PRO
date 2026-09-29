@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SafeCook Pro</string>
+    <string name="tagline">പാചകം. സുരക്ഷിതം. എപ്പോഴും.</string>
+    
+    <!-- Navigation -->
+    <string name="nav_home">ഹോം</string>
+    <string name="nav_monitor">മോണിറ്റർ</string>
+    <string name="nav_alerts">അലേർട്ടുകൾ</string>
+    <string name="nav_history">ചരിത്രം</string>
+    <string name="nav_analytics">അനലിറ്റിക്സ്</string>
+    <string name="nav_device">ഉപകരണം</string>
+    <string name="nav_settings">ക്രമീകരണങ്ങൾ</string>
+
+    <!-- Onboarding -->
+    <string name="ob_skip">ഒഴിവാക്കുക</string>
+    <string name="ob_next">അടുത്തത്</string>
+    <string name="ob_get_started">ആരംഭിക്കുക</string>
+    <string name="ob_slide1_title">നിങ്ങളുടെ അടുക്കളയ്ക്ക് സ്മാർട്ട് സുരക്ഷ</string>
+    <string name="ob_slide1_desc">തത്സമയ എൽപിജി ഗ്യാസ് നിരീക്ഷണം, 24 മണിക്കൂറും, ആഴ്ചയിൽ 7 ദിവസവും.</string>
+    <string name="ob_slide2_title">തൽക്ഷണ ചോർച്ച കണ്ടെത്തൽ</string>
+    <string name="ob_slide2_desc">എൽപിജി ചോർച്ച തൽക്ഷണം കണ്ടെത്തുകയും എല്ലാവരെയും അറിയിക്കുകയും ചെയ്യുന്നു. നിങ്ങളുടെ കുടുംബം സുരക്ഷിതമായിരിക്കും.</string>
+    <string name="ob_slide3_title">ഓട്ടോമാറ്റിക് ഗ്യാസ് ഷട്ട്ഓഫ്</string>
+    <string name="ob_slide3_desc">അപകടം സംഭവിക്കുന്നതിന് മുമ്പ് വാൽവ് സ്വയമേവ അടയ്ക്കുന്നു. സമാധാനമായിരിക്കുക.</string>
+
+    <!-- Auth -->
+    <string name="auth_login">സൈൻ ഇൻ</string>
+    <string name="auth_register">അക്കൗണ്ട് സൃഷ്ടിക്കുക</string>
+    <string name="auth_email">ഇമെയിൽ വിലാസം</string>
+    <string name="auth_password">പാസ്‌വേഡ്</string>
+    <string name="auth_name">പൂർണ്ണമായ പേര്</string>
+    <string name="auth_phone">ഫോൺ നമ്പർ</string>
+    <string name="auth_invite">ഉപകരണ സീരിയൽ നമ്പർ / ഇൻവൈറ്റ് കോഡ്</string>
+    <string name="auth_role_owner">ഉപകരണ ഉടമ</string>
+    <string name="auth_role_family">കുടുംബാംഗം</string>
+
+    <!-- Dashboard & Safety -->
+    <string name="dash_safe">എല്ലാം സാധാരണ നിലയിലാണ്</string>
+    <string name="dash_safe_sub">നിങ്ങളുടെ അടുക്കള സുരക്ഷിതമാണ്</string>
+    <string name="dash_warning">പാത്രം മാറ്റി</string>
+    <string name="dash_warning_sub">വാൽവ് %1$d സെക്കൻഡിനുള്ളിൽ അടയ്ക്കും</string>
+    <string name="dash_emergency">ഗ്യാസ് ചോർച്ച കണ്ടെത്തി</string>
+    <string name="dash_emergency_sub">ഉടൻ ഈ പ്രദേശം വിട്ടുപോകുക</string>
+    <string name="action_shut_valve">വാൽവ് അടയ്ക്കുക</string>
+    <string name="action_test_alarm">അലാറം പരിശോധന</string>
+    <string name="action_reset">റീസെറ്റ്</string>
+    <string name="action_verify_safety">സുരക്ഷ ഉറപ്പാക്കുക</string>
+    <string name="action_silence_alarm">അലാറം നിശബ്ദമാക്കുക</string>
+    <string name="action_call_emergency">അടിയന്തര കോൾ (112)</string>
+    <string name="em_vessel_removed">പാത്രം മാറ്റി</string>
+    <string name="em_gas_warning">ഗ്യാസ് മുന്നറിയിപ്പ്</string>
+    <string name="em_valve_closing">വാൽവ് അടയ്ക്കുന്നു</string>
+    <string name="em_valve_closed">വാൽവ് അടച്ചു</string>
+    <string name="em_protocol_title">സുരക്ഷാ നിർദ്ദേശങ്ങൾ</string>
+
+    <!-- Recipes -->
+    <string name="nav_recipes">പാചകക്കുറിപ്പുകൾ</string>
+    <string name="recipes_title">പാചകക്കുറിപ്പുകൾ</string>
+    <string name="todays_special">ഇന്നത്തെ സ്പെഷ്യൽ</string>
+    <string name="todays_special_sub">ഇന്നത്തെ അടുക്കളയ്ക്കായി ഒരു നല്ല വിഭവം.</string>
+    <string name="category_veg">വെജിറ്റേറിയൻ</string>
+    <string name="category_non_veg">നോൺ-വെജിറ്റേറിയൻ</string>
+    <string name="recipe_ingredients">ചേരുവകൾ</string>
+    <string name="recipe_quick_steps">ലളിതമായ ഘട്ടങ്ങൾ</string>
+    <string name="recipe_kitchen_tip">അടുക്കള ടിപ്പ്</string>
+    <string name="view_recipe">റെസിപ്പി കാണുക</string>
+    <string name="recipe_prep">തയ്യാറാക്കൽ</string>
+    <string name="recipe_cook">പാകം ചെയ്യൽ</string>
+    <string name="recipe_serves">വിഭവങ്ങൾ</string>
+    <string name="recipe_min">മിനിറ്റ്</string>
+
+    <!-- Warning Test -->
+    <string name="warning_test_active">മുന്നറിയിപ്പ് പരിശോധന സജീവമാണ്</string>
+    <string name="warning_test_simulated">ഇതൊരു സുരക്ഷാ മുന്നറിയിപ്പ് പരീക്ഷണമാണ്.</string>
+    <string name="warning_test_acknowledge">മുന്നറിയിപ്പ് അംഗീകരിക്കുക</string>
+    <string name="warning_test_acknowledged">മുന്നറിയിപ്പ് അംഗീകരിച്ചു</string>
+    <string name="warning_test_completed">പരിശോധന വിജയകരമായി പൂർത്തിയായി.</string>
+</resources>

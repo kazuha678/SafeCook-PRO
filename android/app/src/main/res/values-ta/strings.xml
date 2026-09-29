@@ -7,7 +7,9 @@
     <string name="nav_home">முகப்பு</string>
     <string name="nav_monitor">கண்காணிப்பு</string>
     <string name="nav_alerts">எச்சரிக்கை</string>
+    <string name="nav_history">வரலாறு</string>
     <string name="nav_analytics">பகுப்பாய்வு</string>
+    <string name="nav_device">சாதனம்</string>
     <string name="nav_settings">அமைப்புகள்</string>
 
     <!-- Onboarding -->
@@ -42,4 +44,35 @@
     <string name="action_shut_valve">வால்வு மூடு</string>
     <string name="action_test_alarm">அலாரம் சோதனை</string>
     <string name="action_reset">மீட்டமை</string>
+    <string name="action_verify_safety">பாதுகாப்பை சரிபார்</string>
+    <string name="action_silence_alarm">அலாரத்தை நிறுத்து</string>
+    <string name="action_call_emergency">அவசர அழைப்பு (112)</string>
+    <string name="em_vessel_removed">பாத்திரம் அகற்றப்பட்டது</string>
+    <string name="em_gas_warning">கேஸ் எச்சரிக்கை</string>
+    <string name="em_valve_closing">வால்வு மூடுகிறது</string>
+    <string name="em_valve_closed">வால்வு மூடப்பட்டது</string>
+    <string name="em_protocol_title">பாதுகாப்பு நெறிமுறை</string>
+
+    <!-- Recipes -->
+    <string name="nav_recipes">சமையல்</string>
+    <string name="recipes_title">சமையல் குறிப்புகள்</string>
+    <string name="todays_special">இன்றைய ஸ்பெஷல்</string>
+    <string name="todays_special_sub">இன்றைய சமையலறைக்கு ஒரு எளிய யோசனை.</string>
+    <string name="category_veg">சைவம்</string>
+    <string name="category_non_veg">அசைவம்</string>
+    <string name="recipe_ingredients">தேவையான பொருட்கள்</string>
+    <string name="recipe_quick_steps">எளிய செய்முறை</string>
+    <string name="recipe_kitchen_tip">சமையலறை குறிப்பு</string>
+    <string name="view_recipe">செய்முறையை காண்க</string>
+    <string name="recipe_prep">தயாரிப்பு</string>
+    <string name="recipe_cook">சமையல்</string>
+    <string name="recipe_serves">பரிமாறலாம்</string>
+    <string name="recipe_min">நிமிடம்</string>
+
+    <!-- Warning Test -->
+    <string name="warning_test_active">எச்சரிக்கை சோதனை செயலில் உள்ளது</string>
+    <string name="warning_test_simulated">இது ஒரு உருவகப்படுத்தப்பட்ட பாதுகாப்பு எச்சரிக்கை.</string>
+    <string name="warning_test_acknowledge">எச்சரிக்கையை உறுதிசெய்</string>
+    <string name="warning_test_acknowledged">எச்சரிக்கை உறுதிசெய்யப்பட்டது</string>
+    <string name="warning_test_completed">சோதனை வெற்றிகரமாக முடிந்தது.</string>
 </resources>

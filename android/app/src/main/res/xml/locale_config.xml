@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    locale_config.xml
+    Declares all locales supported by SafeCook Pro.
+    Referenced by android:localeConfig in AndroidManifest.xml so the system
+    knows which languages the app officially supports (used by Android 13+
+    per-app language preferences in Settings → App language).
+-->
+<locale-config xmlns:android="http://schemas.android.com/apk/res/android">
+    <locale android:name="en"/>   <!-- English (default) -->
+    <locale android:name="hi"/>   <!-- हिंदी  — Hindi -->
+    <locale android:name="ta"/>   <!-- தமிழ்  — Tamil -->
+    <locale android:name="te"/>   <!-- తెలుగు — Telugu -->
+    <locale android:name="kn"/>   <!-- ಕನ್ನಡ  — Kannada -->
+    <locale android:name="ml"/>   <!-- മലയാളം — Malayalam -->
+</locale-config>

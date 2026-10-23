@@ -346,6 +346,7 @@ const MockData = (() => {
     {
       id: 1, type: 'veg', category: 'breakfast',
       name: 'Masala Dosa', emoji: '🫓',
+      image: 'https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=800&q=80',
       tagline: 'Crispy golden crepe with spiced potato filling',
       time: '30 min', servings: '2–3', difficulty: 'Medium', flameLevel: 'Medium',
       safetyTip: 'Use medium flame when spreading batter. High flame causes uneven cooking and carbon buildup on the burner.',
@@ -374,6 +375,7 @@ const MockData = (() => {
     {
       id: 2, type: 'veg', category: 'lunch',
       name: 'Dal Tadka', emoji: '🍲',
+      image: 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=800&q=80',
       tagline: 'Comforting yellow lentils with smoky tempering',
       time: '25 min', servings: '4', difficulty: 'Easy', flameLevel: 'Low-Medium',
       safetyTip: 'When adding ghee tadka to hot dal, stand back — it splatters. Ensure your SafeCook sensor is in range to detect any gas fluctuation.',
@@ -401,6 +403,7 @@ const MockData = (() => {
     {
       id: 3, type: 'veg', category: 'dinner',
       name: 'Palak Paneer', emoji: '🌿',
+      image: 'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=800&q=80',
       tagline: 'Silky spinach curry with soft cottage cheese',
       time: '35 min', servings: '3–4', difficulty: 'Medium', flameLevel: 'Medium',
       safetyTip: 'Blanching spinach requires boiling water — always keep handles turned inward to avoid accidental spills near the gas burner.',
@@ -429,6 +432,7 @@ const MockData = (() => {
     {
       id: 4, type: 'veg', category: 'snack',
       name: 'Aloo Tikki', emoji: '🥔',
+      image: 'https://images.unsplash.com/photo-1606491956689-2ea866880c84?auto=format&fit=crop&w=800&q=80',
       tagline: 'Crispy spiced potato patties',
       time: '20 min', servings: '4', difficulty: 'Easy', flameLevel: 'Medium',
       safetyTip: 'Shallow frying needs 1–2 cm of oil. Never leave the pan unattended — SafeCook will alert you if the vessel is removed.',
@@ -455,6 +459,7 @@ const MockData = (() => {
     {
       id: 5, type: 'veg', category: 'dessert',
       name: 'Kheer', emoji: '🍮',
+      image: 'https://images.unsplash.com/photo-1574894709920-11b28e7367e3?auto=format&fit=crop&w=800&q=80',
       tagline: 'Creamy rice pudding with cardamom and saffron',
       time: '40 min', servings: '4–5', difficulty: 'Easy', flameLevel: 'Low',
       safetyTip: 'Kheer requires constant stirring on low flame. Do not increase flame — milk burns easily and can overflow causing a gas hazard.',
@@ -482,6 +487,7 @@ const MockData = (() => {
     {
       id: 6, type: 'veg', category: 'lunch',
       name: 'Chole Bhature', emoji: '🫘',
+      image: 'https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=800&q=80',
       tagline: 'Bold chickpea curry with fluffy fried bread',
       time: '50 min', servings: '3–4', difficulty: 'Hard', flameLevel: 'High',
       safetyTip: 'Deep frying bhature needs high heat. Keep a fire extinguisher nearby and never leave hot oil unattended. SafeCook monitors gas flow continuously.',
@@ -510,6 +516,7 @@ const MockData = (() => {
     {
       id: 7, type: 'veg', category: 'dinner',
       name: 'Vegetable Biryani', emoji: '🍚',
+      image: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=800&q=80',
       tagline: 'Fragrant layered rice with seasonal vegetables',
       time: '60 min', servings: '4', difficulty: 'Hard', flameLevel: 'Low-Medium',
       safetyTip: 'Dum cooking seals steam inside the pot. Never open the lid on a hot flame — reduce heat to minimum and wait before opening.',
@@ -535,6 +542,7 @@ const MockData = (() => {
     {
       id: 8, type: 'veg', category: 'breakfast',
       name: 'Poha', emoji: '🌾',
+      image: 'https://images.unsplash.com/photo-1610192244261-3f33de3f55e4?auto=format&fit=crop&w=800&q=80',
       tagline: 'Light flattened rice with mustard, peas and lemon',
       time: '15 min', servings: '2', difficulty: 'Easy', flameLevel: 'Low-Medium',
       safetyTip: 'Poha cooks very quickly on low-medium flame. Keep gas on minimal setting to avoid burning. Always stay near the stove.',
@@ -561,6 +569,7 @@ const MockData = (() => {
     {
       id: 9, type: 'veg', category: 'snack',
       name: 'Samosa', emoji: '🔺',
+      image: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=80',
       tagline: 'Crispy pastry pockets stuffed with spiced potatoes',
       time: '45 min', servings: '4–6', difficulty: 'Medium', flameLevel: 'High',
       safetyTip: 'Deep frying samosas needs consistent high heat. Monitor oil temperature and keep water away from hot oil to avoid dangerous splattering.',
@@ -587,6 +596,7 @@ const MockData = (() => {
     {
       id: 10, type: 'veg', category: 'dinner',
       name: 'Pav Bhaji', emoji: '🍞',
+      image: 'https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=800&q=80',
       tagline: 'Spiced mashed vegetable curry with buttered buns',
       time: '30 min', servings: '4', difficulty: 'Easy', flameLevel: 'Medium',
       safetyTip: 'Mashing vegetables on high heat causes hot splatter. Lower the flame before mashing vigorously and keep a splatter guard handy.',
@@ -615,6 +625,7 @@ const MockData = (() => {
     {
       id: 11, type: 'nonveg', category: 'dinner',
       name: 'Butter Chicken', emoji: '🍗',
+      image: 'https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?auto=format&fit=crop&w=800&q=80',
       tagline: 'Velvety tomato-butter sauce with tender chicken',
       time: '45 min', servings: '4', difficulty: 'Medium', flameLevel: 'Medium',
       safetyTip: 'Ensure chicken is cooked to an internal temperature of 75°C. Cook on consistent medium flame — high heat makes the sauce separate.',
@@ -642,6 +653,7 @@ const MockData = (() => {
     {
       id: 12, type: 'nonveg', category: 'lunch',
       name: 'Chicken Biryani', emoji: '🍛',
+      image: 'https://images.unsplash.com/photo-1633945274405-b6c8069047b0?auto=format&fit=crop&w=800&q=80',
       tagline: 'Aromatic rice layered with marinated chicken',
       time: '70 min', servings: '4–5', difficulty: 'Hard', flameLevel: 'Low-Medium',
       safetyTip: 'Never cook on full flame while doing dum. Keep the flame on its lowest setting. The sealed steam does the cooking — patience is key.',
@@ -668,6 +680,7 @@ const MockData = (() => {
     {
       id: 13, type: 'nonveg', category: 'breakfast',
       name: 'Egg Bhurji', emoji: '🥚',
+      image: 'https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=800&q=80',
       tagline: 'Spicy scrambled eggs with onion and tomatoes',
       time: '12 min', servings: '2', difficulty: 'Easy', flameLevel: 'Medium',
       safetyTip: 'Eggs cook quickly on high heat and can dry out. Use medium flame and stir constantly. Never leave the pan unattended.',
@@ -694,6 +707,7 @@ const MockData = (() => {
     {
       id: 14, type: 'nonveg', category: 'snack',
       name: 'Chicken 65', emoji: '🌶️',
+      image: 'https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=800&q=80',
       tagline: 'Crispy spiced deep-fried chicken bites',
       time: '30 min', servings: '3–4', difficulty: 'Medium', flameLevel: 'High',
       safetyTip: 'Deep frying requires high flame and hot oil. Never exceed 180°C. Keep a fire blanket nearby and ensure your SafeCook valve is operational.',
@@ -720,6 +734,7 @@ const MockData = (() => {
     {
       id: 15, type: 'nonveg', category: 'dinner',
       name: 'Fish Curry', emoji: '🐟',
+      image: 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=800&q=80',
       tagline: 'Tangy coconut fish curry from coastal India',
       time: '30 min', servings: '3', difficulty: 'Medium', flameLevel: 'Medium',
       safetyTip: 'Fish releases moisture quickly when hot. Reduce flame when adding fish to prevent excessive boiling that breaks the pieces.',
@@ -748,6 +763,7 @@ const MockData = (() => {
     {
       id: 16, type: 'nonveg', category: 'lunch',
       name: 'Keema Pav', emoji: '🥩',
+      image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80',
       tagline: 'Spiced minced meat with buttered bread rolls',
       time: '35 min', servings: '4', difficulty: 'Easy', flameLevel: 'Medium',
       safetyTip: 'Ensure minced meat is cooked thoroughly (no pink colour). Cook on consistent medium flame and stir often to ensure even cooking.',
@@ -774,6 +790,7 @@ const MockData = (() => {
     {
       id: 17, type: 'nonveg', category: 'dinner',
       name: 'Mutton Rogan Josh', emoji: '🍖',
+      image: 'https://images.unsplash.com/photo-1545247181-516773cae754?auto=format&fit=crop&w=800&q=80',
       tagline: 'Slow-cooked Kashmiri mutton in aromatic red gravy',
       time: '90 min', servings: '4', difficulty: 'Hard', flameLevel: 'Low-Medium',
       safetyTip: 'Slow cooking for 90+ minutes — ensure the gas cylinder level is adequate before starting. SafeCook monitors gas consumption in real time.',
@@ -801,6 +818,7 @@ const MockData = (() => {
     {
       id: 18, type: 'nonveg', category: 'snack',
       name: 'Prawn Fritters', emoji: '🦐',
+      image: 'https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=800&q=80',
       tagline: 'Crispy batter-fried prawns with coastal spices',
       time: '20 min', servings: '2–3', difficulty: 'Easy', flameLevel: 'High',
       safetyTip: 'Prawns contain water — patting them dry before frying prevents dangerous oil splatters. Keep a splatter screen over the pan.',

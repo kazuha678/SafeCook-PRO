@@ -23,5 +23,6 @@ data class Recipe(
     val ingredients: List<String>, // Essential items only
     val steps: List<String>,       // Quick steps — brief and readable
     val safetyTip: String,         // One relevant kitchen-safety reminder
-    val heroEmoji: String          // Used in the image placeholder area
+    val imageUrl: String = "",     // Real photo URL from internet
+    val heroEmoji: String = ""     // Used as fallback in placeholder area
 )

@@ -24,6 +24,10 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.layout.ContentScale
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import com.safecookpro.R
 import com.safecookpro.data.RecipeRepository
 import com.safecookpro.data.model.Recipe
@@ -185,11 +189,88 @@ private fun CategorySelector(
 }
 
 @Composable
+private fun RecipeHeroImage(
+    imageUrl: String,
+    contentDescription: String,
+    fallbackEmoji: String,
+    modifier: Modifier = Modifier
+) {
+    var bitmap by remember(imageUrl) { mutableStateOf<androidx.compose.ui.graphics.ImageBitmap?>(null) }
+    var isLoading by remember(imageUrl) { mutableStateOf(imageUrl.isNotBlank()) }
+
+    LaunchedEffect(imageUrl) {
+        if (imageUrl.isBlank()) {
+            isLoading = false
+            return@LaunchedEffect
+        }
+        withContext(Dispatchers.IO) {
+            try {
+                val conn = java.net.URL(imageUrl).openConnection() as java.net.HttpURLConnection
+                conn.doInput = true
+                conn.connectTimeout = 6000
+                conn.readTimeout = 6000
+                conn.connect()
+                val stream = conn.inputStream
+                val bmp = android.graphics.BitmapFactory.decodeStream(stream)
+                stream.close()
+                if (bmp != null) {
+                    bitmap = bmp.asImageBitmap()
+                }
+            } catch (_: Exception) {
+                // Keep null to fall back to emoji
+            } finally {
+                isLoading = false
+            }
+        }
+    }
+
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(180.dp)
+            .clip(RoundedCornerShape(16.dp))
+            .background(MaterialTheme.colorScheme.surfaceVariant),
+        contentAlignment = Alignment.Center
+    ) {
+        val currentBitmap = bitmap
+        if (currentBitmap != null) {
+            androidx.compose.foundation.Image(
+                bitmap = currentBitmap,
+                contentDescription = contentDescription,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.fillMaxSize()
+            )
+        } else if (isLoading) {
+            CircularProgressIndicator(
+                modifier = Modifier.size(24.dp),
+                strokeWidth = 2.dp,
+                color = MaterialTheme.colorScheme.primary
+            )
+        } else {
+            Text(
+                text = fallbackEmoji.ifBlank { "🍳" },
+                fontSize = 44.sp
+            )
+        }
+    }
+}
+
+@Composable
 private fun FeaturedRecipeSection(recipe: Recipe) {
     val accentColor = if (recipe.category == RecipeCategory.VEG) SafeCookColors.emerald else SafeCookColors.amber
     val categoryLabel = if (recipe.category == RecipeCategory.VEG) stringResource(R.string.category_veg) else stringResource(R.string.category_non_veg)
 
     Column(modifier = Modifier.fillMaxWidth()) {
+        // Hero Image
+        if (recipe.imageUrl.isNotBlank() || recipe.heroEmoji.isNotBlank()) {
+            RecipeHeroImage(
+                imageUrl = recipe.imageUrl,
+                contentDescription = recipe.name,
+                fallbackEmoji = recipe.heroEmoji
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+        }
+
         // Subtle category badge
         Row(
             verticalAlignment = Alignment.CenterVertically,

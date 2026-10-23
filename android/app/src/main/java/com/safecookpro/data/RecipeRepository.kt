@@ -25,6 +25,7 @@ object RecipeRepository {
             prepMinutes = 15,
             cookMinutes = 25,
             servings    = 3,
+            imageUrl    = "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=800&q=80",
             heroEmoji   = "🧀",
             ingredients = listOf(
                 "Paneer — 250 g, cubed",
@@ -56,6 +57,7 @@ object RecipeRepository {
             prepMinutes = 10,
             cookMinutes = 20,
             servings    = 4,
+            imageUrl    = "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=800&q=80",
             heroEmoji   = "🍚",
             ingredients = listOf(
                 "Basmati rice — 1½ cups, soaked 20 min",
@@ -85,6 +87,7 @@ object RecipeRepository {
             prepMinutes = 15,
             cookMinutes = 20,
             servings    = 2,
+            imageUrl    = "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=800&q=80",
             heroEmoji   = "🫓",
             ingredients = listOf(
                 "Ready dosa batter — 2 cups",
@@ -116,6 +119,7 @@ object RecipeRepository {
             prepMinutes = 10,
             cookMinutes = 30,
             servings    = 3,
+            imageUrl    = "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=800&q=80",
             heroEmoji   = "🍗",
             ingredients = listOf(
                 "Chicken — 500 g, curry-cut pieces",
@@ -146,6 +150,7 @@ object RecipeRepository {
             prepMinutes = 5,
             cookMinutes = 20,
             servings    = 2,
+            imageUrl    = "https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=800&q=80",
             heroEmoji   = "🥚",
             ingredients = listOf(
                 "Eggs — 4, hard-boiled and peeled",
@@ -176,6 +181,7 @@ object RecipeRepository {
             prepMinutes = 30,
             cookMinutes = 45,
             servings    = 5,
+            imageUrl    = "https://images.unsplash.com/photo-1633945274405-b6c8069047b0?auto=format&fit=crop&w=800&q=80",
             heroEmoji   = "🍛",
             ingredients = listOf(
                 "Chicken — 750 g, bone-in pieces",

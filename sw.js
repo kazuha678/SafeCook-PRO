@@ -2,7 +2,7 @@
    SafeCook Pro — PWA Service Worker (Network-First Strategy)
    ============================================================ */
 
-const CACHE_NAME = 'safecook-pro-cache-v9';
+const CACHE_NAME = 'safecook-pro-cache-v10';
 const ASSETS = [
   './',
   'index.html',

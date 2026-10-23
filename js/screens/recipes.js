@@ -71,10 +71,16 @@ var Recipes = (function() {
       var cardClass = tab === 'veg' ? 'recipe-card-veg' : 'recipe-card-nonveg';
       var badgeClass = tab === 'veg' ? 'badge-veg' : 'badge-nonveg';
       var badgeText  = tab === 'veg' ? '🌿 Veg' : '🍖 Non-Veg';
+      var imgHtml = r.image ? (
+        '<img class="recipe-card-img" src="' + r.image + '" alt="' + r.name + '" loading="lazy" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\';">' +
+        '<div class="recipe-thumb-emoji" style="display:none">' + (r.emoji || '🍽️') + '</div>'
+      ) : (
+        '<div class="recipe-thumb-emoji">' + (r.emoji || '🍽️') + '</div>'
+      );
       return (
         '<div class="recipe-card ' + cardClass + '" onclick="Recipes.openDetail(' + r.id + ')" role="button" tabindex="0" id="recipe-card-' + r.id + '" style="animation-delay:' + (i * 55) + 'ms">' +
           '<div class="recipe-card-thumb">' +
-            '<div class="recipe-thumb-emoji">' + r.emoji + '</div>' +
+            imgHtml +
             '<div class="recipe-type-badge ' + badgeClass + '">' + badgeText + '</div>' +
             '<div class="recipe-card-meta-overlay">' +
               '<span class="recipe-meta-pill">⏱ ' + r.time + '</span>' +
@@ -137,6 +143,14 @@ var Recipes = (function() {
     var badge = isVeg ? 'badge-veg' : 'badge-nonveg';
     var badgeTxt = isVeg ? '🌿 Vegetarian' : '🍖 Non-Vegetarian';
     var stepCls = isVeg ? 'step-veg' : 'step-nonveg';
+    var heroMediaHtml = r.image ? (
+      '<div class="recipe-detail-hero-media">' +
+        '<img class="recipe-detail-img" src="' + r.image + '" alt="' + r.name + '" loading="eager" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\';">' +
+        '<div class="recipe-detail-emoji" style="display:none">' + (r.emoji || '🍽️') + '</div>' +
+      '</div>'
+    ) : (
+      '<div class="recipe-detail-emoji">' + (r.emoji || '🍽️') + '</div>'
+    );
     var mc = document.getElementById('recipe-modal-content');
     if (mc) {
       mc.innerHTML =
@@ -145,7 +159,7 @@ var Recipes = (function() {
           '<button class="recipe-detail-close" onclick="Recipes.closeDetail(null)" aria-label="Close">' +
             '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="20" height="20">' +
             '<line x1=\"18\" y1=\"6\" x2=\"6\" y2=\"18\"/><line x1=\"6\" y1=\"6\" x2=\"18\" y2=\"18\"/></svg></button>' +
-          '<div class="recipe-detail-emoji">' + r.emoji + '</div>' +
+          heroMediaHtml +
           '<div class="recipe-detail-badge ' + badge + '">' + badgeTxt + '</div>' +
           '<h2 class="recipe-detail-name">' + r.name + '</h2>' +
           '<p class="recipe-detail-tagline">' + r.tagline + '</p>' +

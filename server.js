@@ -3,7 +3,9 @@ const fs = require('fs');
 const path = require('path');
 
 const PORT = parseInt(process.env.PORT || '8080', 10);
-const DB_PATH = process.env.DATABASE_PATH ? path.resolve(process.env.DATABASE_PATH) : path.join(__dirname, 'safecook.db');
+const DB_PATH = process.env.DATABASE_PATH 
+  ? path.resolve(process.env.DATABASE_PATH) 
+  : (process.env.VERCEL ? path.join('/tmp', 'safecook.db') : path.join(__dirname, 'safecook.db'));
 
 const MIME_TYPES = {
   '.html': 'text/html',
@@ -18,11 +20,17 @@ const MIME_TYPES = {
   '.apk': 'application/vnd.android.package-archive'
 };
 
-const { DatabaseSync } = require('node:sqlite');
-const db = new DatabaseSync(DB_PATH);
+let db = null;
+try {
+  const { DatabaseSync } = require('node:sqlite');
+  db = new DatabaseSync(DB_PATH);
+} catch (err) {
+  console.warn('[SafeCook Server] SQLite initialization skipped (running in serverless or fallback mode):', err.message);
+}
 
 // Initialize SQLite schema
-db.exec(`
+if (db) {
+  db.exec(`
   CREATE TABLE IF NOT EXISTS sensor_history (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     gas_ppm REAL NOT NULL,
@@ -106,6 +114,7 @@ db.exec(`
     val TEXT
   );
 `);
+}
 
 function getRequestBody(req) {
   return new Promise((resolve, reject) => {
@@ -122,7 +131,7 @@ function getRequestBody(req) {
   });
 }
 
-const server = http.createServer(async (req, res) => {
+async function handler(req, res) {
   console.log(`${req.method} ${req.url}`);
 
   res.setHeader('X-Content-Type-Options', 'nosniff');
@@ -138,6 +147,11 @@ const server = http.createServer(async (req, res) => {
       'X-Content-Type-Options': 'nosniff',
       'X-Frame-Options': 'DENY'
     });
+    
+    if (!db) {
+      res.end(JSON.stringify({ status: 'ok', serverless: true, initialized: false }));
+      return;
+    }
     
     if (req.url === '/api/data' && req.method === 'GET') {
       try {
@@ -490,7 +504,8 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  let filePath = path.join(__dirname, req.url === '/' ? 'index.html' : req.url);
+  const cleanUrl = req.url.split('?')[0];
+  let filePath = path.join(__dirname, cleanUrl === '/' ? 'index.html' : cleanUrl);
 
   // Prevent directory traversal
   if (!filePath.startsWith(__dirname)) {
@@ -516,8 +531,15 @@ const server = http.createServer(async (req, res) => {
       res.end(content, 'utf-8');
     }
   });
-});
+}
 
-server.listen(PORT, () => {
-  console.log(`SafeCook Pro Preview Server running at http://localhost:${PORT}`);
-});
+const server = http.createServer(handler);
+
+if (!process.env.VERCEL) {
+  server.listen(PORT, () => {
+    console.log(`SafeCook Pro Preview Server running at http://localhost:${PORT}`);
+  });
+}
+
+// Vercel requires a plain function export, not an http.Server
+module.exports = handler;
